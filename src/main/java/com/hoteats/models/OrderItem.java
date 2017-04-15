@@ -5,14 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.RelationTargetAuditMode;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 public class OrderItem {
 
 	@Id
@@ -20,7 +16,7 @@ public class OrderItem {
 
 	@JsonBackReference
 	@ManyToOne
-	private Order order;
+	private Orders orders;
 
 	@JsonManagedReference
 	@ManyToOne
@@ -40,12 +36,12 @@ public class OrderItem {
 		this.id = id;
 	}
 
-	public Order getOrder() {
-		return order;
+	public Orders getOrders() {
+		return orders;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrders(Orders orders) {
+		this.orders = orders;
 	}
 
 	public Item getItem() {

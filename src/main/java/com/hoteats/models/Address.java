@@ -2,6 +2,7 @@ package com.hoteats.models;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 
 @Embeddable
 public class Address {
@@ -27,18 +28,16 @@ public class Address {
 	@Column
 	private String addressName;
 
-	// @OneToOne
-	// private Location location;
+	@Embedded
+	private Coordinate coordinate;
 
-	// public void setLocation(Location location) {
-	// this.location = location;
-	// }
+	public Coordinate getCoordinate() {
+		return coordinate;
+	}
 
-	// public Location getLocation() {
-	// return location;
-	// }
-
-	// private User user;
+	public void setCoordinate(Coordinate coordinate) {
+		this.coordinate = coordinate;
+	}
 
 	public String getDoorNo() {
 		return doorNo;

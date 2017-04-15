@@ -2,8 +2,10 @@ package com.hoteats.models;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -24,7 +26,7 @@ public class Delivery {
 	private Long contactNo;
 
 	@JsonManagedReference
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Track track;
 
 	@Column
@@ -41,7 +43,7 @@ public class Delivery {
 
 	@JsonBackReference
 	@ManyToOne
-	private Order order;
+	private Orders orders;
 
 	public Track getTrack() {
 		return track;
@@ -107,12 +109,12 @@ public class Delivery {
 		this.address = address;
 	}
 
-	public Order getOrder() {
-		return order;
+	public Orders getOrders() {
+		return orders;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrders(Orders orders) {
+		this.orders = orders;
 	}
 
 }

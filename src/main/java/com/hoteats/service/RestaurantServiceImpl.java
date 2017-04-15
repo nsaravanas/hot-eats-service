@@ -2,6 +2,8 @@ package com.hoteats.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +14,24 @@ import com.hoteats.repository.RestaurantRepository;
 public class RestaurantServiceImpl implements RestaurantService {
 
 	@Autowired
-	private RestaurantRepository restaurantRepository;
+	private RestaurantRepository repository;
 
 	@Override
+	@Transactional
 	public Restaurant getRestaurantById(Long restaurantId) {
-		return this.restaurantRepository.findOne(restaurantId);
+		return this.repository.findOne(restaurantId);
 	}
 
 	@Override
+	@Transactional
 	public List<Restaurant> getAllRestaurants() {
-		return this.restaurantRepository.findAll();
+		return this.repository.findAll();
+	}
+
+	@Override
+	@Transactional
+	public Restaurant saveRestaurant(Restaurant restaurant) {
+		return this.repository.save(restaurant);
 	}
 
 }

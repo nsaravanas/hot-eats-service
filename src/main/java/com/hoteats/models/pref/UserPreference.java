@@ -9,10 +9,9 @@ import javax.persistence.OneToMany;
 
 import com.hoteats.models.Item;
 import com.hoteats.models.User;
-import com.hoteats.models.audit.AuditInfo;
 
 @Entity
-public class UserPreference extends AuditInfo {
+public class UserPreference {
 
 	@Id
 	private Long id;

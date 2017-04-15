@@ -1,9 +1,11 @@
 package com.hoteats.service;
 
-import com.hoteats.models.Order;
+import com.hoteats.models.Orders;
 
 public interface OrderService {
 
-	Order getOrderById(Long orderId);
+	Orders getOrderById(Long orderId);
+
+	Orders saveOrder(Orders testOrder);
 
 }

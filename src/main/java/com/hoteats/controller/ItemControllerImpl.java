@@ -18,33 +18,33 @@ import com.hoteats.service.ItemService;
 public class ItemControllerImpl implements ItemController {
 
 	@Autowired
-	private ItemService itemService;
+	private ItemService service;
 
 	@Override
 	@RequestMapping(value = "/hot", method = RequestMethod.GET)
 	public List<Item> hotSelling() {
 		final String query = "hot";
-		return this.itemService.search(Arrays.asList(query));
+		return this.service.search(Arrays.asList(query));
 	}
 
 	@Override
 	@RequestMapping(value = "/fast", method = RequestMethod.GET)
 	public List<Item> fastMoving() {
 		final String query = "fast";
-		return this.itemService.search(Arrays.asList(query));
+		return this.service.search(Arrays.asList(query));
 	}
 
 	@Override
 	@RequestMapping(value = "/eatnow", method = RequestMethod.GET)
 	public List<Item> eatNow() {
 		final String query = "eatnow";
-		return this.itemService.search(Arrays.asList(query));
+		return this.service.search(Arrays.asList(query));
 	}
 
 	@Override
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public List<Item> searchItems(@RequestBody List<String> tags) {
-		return this.itemService.search(tags);
+		return this.service.search(tags);
 	}
 
 	@RequestMapping(value = "/sample", method = RequestMethod.GET)
@@ -52,4 +52,8 @@ public class ItemControllerImpl implements ItemController {
 		return CommonStubs.items();
 	}
 
+	@RequestMapping(value = "/addAll", method = RequestMethod.GET)
+	public List<Item> addAll() {
+		return this.service.saveAll(sample());
+	}
 }

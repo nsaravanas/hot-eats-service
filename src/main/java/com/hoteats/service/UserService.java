@@ -6,4 +6,6 @@ public interface UserService {
 
 	User findByUserById(Long userId);
 
+	User saveUser(User testUser);
+
 }

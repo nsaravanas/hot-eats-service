@@ -2,15 +2,15 @@ package com.hoteats.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.hoteats.models.Delivery;
-import com.hoteats.models.TimeCoorinate;
 
 @Entity
 public class Track {
@@ -19,7 +19,7 @@ public class Track {
 	private Long trackId;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "track")
+	@OneToMany(mappedBy = "track", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<TimeCoorinate> timeCoorinates;
 
 	@JsonBackReference

@@ -10,4 +10,6 @@ public interface RestaurantService {
 
 	List<Restaurant> getAllRestaurants();
 
+	Restaurant saveRestaurant(Restaurant testRestaurant);
+
 }

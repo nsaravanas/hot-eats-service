@@ -3,25 +3,23 @@ package com.hoteats.models;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.RelationTargetAuditMode;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hoteats.models.enums.Status;
 
 @Entity
-@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
-public class Order {
+public class Orders {
 
 	@Id
 	private Long orderId;
@@ -30,7 +28,7 @@ public class Order {
 	private User user;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<OrderItem> orderItems;
 
 	@Column
@@ -49,7 +47,7 @@ public class Order {
 	private OrderPrice orderPrice;
 
 	@JsonManagedReference
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Delivery delivery;
 
 	public Delivery getDelivery() {

@@ -6,13 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.RelationTargetAuditMode;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 public class UserAddress {
 
 	@Id

@@ -1,5 +1,7 @@
 package com.hoteats.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +12,17 @@ import com.hoteats.repository.UserRepository;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserRepository repository;
 
 	@Override
+	@Transactional
 	public User findByUserById(Long userId) {
-		return this.userRepository.findOne(userId);
+		return this.repository.findOne(userId);
 	}
 
+	@Override
+	@Transactional
+	public User saveUser(User user) {
+		return this.repository.save(user);
+	}
 }

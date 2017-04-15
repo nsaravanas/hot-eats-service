@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hoteats.commons.CommonStubs;
-import com.hoteats.models.Order;
+import com.hoteats.models.Orders;
 import com.hoteats.service.OrderService;
 
 @RestController
@@ -15,17 +15,21 @@ import com.hoteats.service.OrderService;
 public class OrderControllerImpl implements OrderController {
 
 	@Autowired
-	private OrderService orderService;
+	private OrderService service;
 
 	@Override
 	@RequestMapping(value = "/order/{orderId}", method = RequestMethod.GET)
-	public Order getOrderById(@PathVariable Long orderId) {
-		return this.orderService.getOrderById(orderId);
+	public Orders getOrderById(@PathVariable Long orderId) {
+		return this.service.getOrderById(orderId);
 	}
 
 	@RequestMapping(value = "/sampleorder", method = RequestMethod.GET)
-	public Order testOrder() {
+	public Orders testOrder() {
 		return CommonStubs.testOrder();
 	}
 
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public Orders addOrder() {
+		return this.service.saveOrder(CommonStubs.testOrder());
+	}
 }

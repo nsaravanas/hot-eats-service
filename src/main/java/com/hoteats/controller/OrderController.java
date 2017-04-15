@@ -1,9 +1,9 @@
 package com.hoteats.controller;
 
-import com.hoteats.models.Order;
+import com.hoteats.models.Orders;
 
 public interface OrderController {
 
-	Order getOrderById(Long orderId);
+	Orders getOrderById(Long orderId);
 
 }
