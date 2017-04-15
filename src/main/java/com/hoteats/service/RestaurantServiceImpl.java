@@ -12,16 +12,21 @@ import com.hoteats.repository.RestaurantRepository;
 public class RestaurantServiceImpl implements RestaurantService {
 
 	@Autowired
-	private RestaurantRepository restaurantRepository;
+	private RestaurantRepository repository;
 
 	@Override
 	public Restaurant getRestaurantById(Long restaurantId) {
-		return this.restaurantRepository.findOne(restaurantId);
+		return this.repository.findOne(restaurantId);
 	}
 
 	@Override
 	public List<Restaurant> getAllRestaurants() {
-		return this.restaurantRepository.findAll();
+		return this.repository.findAll();
+	}
+
+	@Override
+	public Restaurant saveRestaurant(Restaurant restaurant) {
+		return this.repository.save(restaurant);
 	}
 
 }

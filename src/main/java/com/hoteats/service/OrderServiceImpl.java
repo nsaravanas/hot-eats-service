@@ -10,11 +10,16 @@ import com.hoteats.repository.OrderRepository;
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
-	private OrderRepository orderRepository;
+	private OrderRepository repository;
 
 	@Override
 	public Order getOrderById(Long orderId) {
-		return orderRepository.findOne(orderId);
+		return this.repository.findOne(orderId);
+	}
+
+	@Override
+	public Order saveOrder(Order order) {
+		return this.repository.save(order);
 	}
 
 }

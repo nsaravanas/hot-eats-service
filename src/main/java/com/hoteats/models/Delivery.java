@@ -2,8 +2,10 @@ package com.hoteats.models;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -24,7 +26,7 @@ public class Delivery {
 	private Long contactNo;
 
 	@JsonManagedReference
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Track track;
 
 	@Column

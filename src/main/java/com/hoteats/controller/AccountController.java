@@ -20,21 +20,21 @@ import com.hoteats.security.repository.AccountRepository;
 public class AccountController {
 
 	@Autowired
-	private AccountRepository accountRepository;
+	private AccountRepository repository;
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Account addAccount(@RequestBody @Valid Account account) {
-		return this.accountRepository.save(account);
+		return this.repository.save(account);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public List<String> accounts() {
-		return this.accountRepository.findAll().stream().map(Account::getUsername).collect(Collectors.toList());
+		return this.repository.findAll().stream().map(Account::getUsername).collect(Collectors.toList());
 	}
 
 	@RequestMapping(value = "/echo/{username}", method = RequestMethod.GET)
 	public String echo(@PathVariable String username) {
-		Account account = this.accountRepository.findByUsername(username);
+		Account account = this.repository.findByUsername(username);
 		if (account == null)
 			return username + " not a registered username";
 		else

@@ -3,11 +3,13 @@ package com.hoteats.models;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -30,6 +32,7 @@ public class Item {
 	@Column
 	private String name;
 
+	@Column
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
@@ -44,8 +47,8 @@ public class Item {
 	private Menu menu;
 
 	@JsonManagedReference
-	@OneToOne
-	private ItemOffer itemOffer;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private ItemOffer offer;
 
 	@Column
 	@Enumerated(EnumType.STRING)
@@ -70,12 +73,12 @@ public class Item {
 		this.description = description;
 	}
 
-	public ItemOffer getItemOffer() {
-		return itemOffer;
+	public ItemOffer getOffer() {
+		return offer;
 	}
 
-	public void setItemOffer(ItemOffer itemOffer) {
-		this.itemOffer = itemOffer;
+	public void setOffer(ItemOffer offer) {
+		this.offer = offer;
 	}
 
 	public Menu getMenu() {

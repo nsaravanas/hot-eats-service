@@ -15,12 +15,12 @@ import com.hoteats.service.OrderService;
 public class OrderControllerImpl implements OrderController {
 
 	@Autowired
-	private OrderService orderService;
+	private OrderService service;
 
 	@Override
 	@RequestMapping(value = "/order/{orderId}", method = RequestMethod.GET)
 	public Order getOrderById(@PathVariable Long orderId) {
-		return this.orderService.getOrderById(orderId);
+		return this.service.getOrderById(orderId);
 	}
 
 	@RequestMapping(value = "/sampleorder", method = RequestMethod.GET)
@@ -28,4 +28,8 @@ public class OrderControllerImpl implements OrderController {
 		return CommonStubs.testOrder();
 	}
 
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public Order addOrder() {
+		return this.service.saveOrder(CommonStubs.testOrder());
+	}
 }

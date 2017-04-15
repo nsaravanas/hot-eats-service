@@ -17,18 +17,18 @@ import com.hoteats.service.RestaurantService;
 public class RestaurantControllerImpl implements RestaurantController {
 
 	@Autowired
-	private RestaurantService restaurantService;
+	private RestaurantService service;
 
 	@Override
 	@RequestMapping(value = "/restaurant/{restaurantId}", method = RequestMethod.GET)
 	public Restaurant getRestaurantById(@PathVariable Long restaurantId) {
-		return this.restaurantService.getRestaurantById(restaurantId);
+		return this.service.getRestaurantById(restaurantId);
 	}
 
 	@Override
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public List<Restaurant> getAllRestaurants() {
-		return this.restaurantService.getAllRestaurants();
+		return this.service.getAllRestaurants();
 	}
 
 	@RequestMapping(value = "/samplerestaurant", method = RequestMethod.GET)
@@ -36,4 +36,8 @@ public class RestaurantControllerImpl implements RestaurantController {
 		return CommonStubs.testRestaurant();
 	}
 
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public Restaurant addRestaurant() {
+		return this.service.saveRestaurant(CommonStubs.testRestaurant());
+	}
 }

@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.hoteats.models.Address;
-import com.hoteats.models.Coordinate;
 import com.hoteats.models.Delivery;
 import com.hoteats.models.Item;
 import com.hoteats.models.ItemOffer;
@@ -22,7 +21,6 @@ import com.hoteats.models.OrderItem;
 import com.hoteats.models.OrderPrice;
 import com.hoteats.models.Restaurant;
 import com.hoteats.models.RestaurantAddress;
-import com.hoteats.models.TimeCoorinate;
 import com.hoteats.models.Track;
 import com.hoteats.models.User;
 import com.hoteats.models.UserAddress;
@@ -43,23 +41,23 @@ public class CommonStubs {
 		r.setRestaurantId(100L);
 		List<Menu> menu = new ArrayList<>();
 		Menu m1 = new Menu();
-		m1.setId(10L);
+		m1.setId(1L);
 		m1.setRestaurant(r);
 		List<Item> items = new ArrayList<>();
 		Item i1 = new Item();
-		i1.setItemId(1L);
+		i1.setItemId(100L);
 		i1.setName("BF-1");
 		i1.setPrice(new BigDecimal("45.50"));
 		i1.setStatus(Status.PLACED);
 		ItemOffer of1 = new ItemOffer();
-		of1.setItemOfferId(1L);
+		of1.setItemOfferId(100L);
 		of1.setFlatDiscount(new BigDecimal(200.0));
 		of1.setOfferPercentage(new BigDecimal(10.0));
 		of1.setItem(i1);
 		of1.setOfferFrom(LocalDateTime.of(2017, 01, 01, 00, 00, 00));
 		of1.setOfferTill(LocalDateTime.of(2017, 12, 31, 00, 00, 00));
 		of1.setOfferType(OfferType.PERCENTAGE);
-		i1.setItemOffer(of1);
+		i1.setOffer(of1);
 		Set<String> tags = new HashSet<>();
 		tags.add("Hot deal");
 		tags.add("Fast selling");
@@ -68,8 +66,6 @@ public class CommonStubs {
 		i1.setMenu(m1);
 		items.add(i1);
 		m1.setItems(items);
-		menu.add(m1);
-		r.setMenu(menu);
 		List<RestaurantAddress> branches = new ArrayList<>();
 		RestaurantAddress ra1 = new RestaurantAddress();
 		ra1.setRestaurantAddressId(1L);
@@ -85,6 +81,16 @@ public class CommonStubs {
 		ra1.setAddress(a1);
 		branches.add(ra1);
 		r.setBranches(branches);
+		Menu m2 = new Menu();
+		m2.setId(2L);
+		m2.setRestaurant(r);
+		List<Item> it = items();
+		it.stream().forEach(i -> i.setMenu(m2));
+		m2.setItems(it);
+		m2.setRestaurant(r);
+		menu.add(m1);
+		menu.add(m2);
+		r.setMenu(menu);
 		return r;
 	}
 
@@ -110,7 +116,8 @@ public class CommonStubs {
 	}
 
 	public static Item item(int id, String name, String price) {
-		List<String> tags = new ArrayList<>(Arrays.asList("hot", "best", "fast", "breakfast", "combo"));
+		List<String> tags = new ArrayList<>(
+				Arrays.asList("hot", "best", "fast", "breakfast", "combo", "lunch", "dinner"));
 		Item i1 = new Item();
 		i1.setItemId((long) id);
 		i1.setName(name);
@@ -119,8 +126,8 @@ public class CommonStubs {
 		i1.setType(name.contains("+") ? ItemType.COMBO : ItemType.NORMAL);
 		i1.setPrice(new BigDecimal(Double.parseDouble(price)));
 		i1.setStatus(Status.AVAILABLE);
-		i1.setItemOffer(randomOffers(id, Double.parseDouble(price)));
-		i1.getItemOffer().setItem(i1);
+		i1.setOffer(randomOffers(id, Double.parseDouble(price)));
+		i1.getOffer().setItem(i1);
 		return i1;
 	}
 
@@ -201,19 +208,20 @@ public class CommonStubs {
 		delivery.setRegistrationDate(LocalDate.now());
 		Track track = new Track();
 		track.setTrackId(12L);
-		List<TimeCoorinate> coorinates = new ArrayList<>();
-		TimeCoorinate tc1 = new TimeCoorinate();
-		tc1.setId(12L);
-		tc1.setTime(LocalDateTime.now());
-		tc1.setTrack(track);
-		Coordinate co = new Coordinate();
-		co.setLatitude(12.345);
-		co.setLongitude(23.564);
-		tc1.setCoordinate(co);
-		coorinates.add(tc1);
-		coorinates.add(tc1);
-		track.setTimeCoorinates(coorinates);
+		// List<TimeCoorinate> coorinates = new ArrayList<>();
+		// TimeCoorinate tc1 = new TimeCoorinate();
+		// tc1.setId(12L);
+		// tc1.setTime(LocalDateTime.now());
+		// tc1.setTrack(track);
+		// Coordinate co = new Coordinate();
+		// co.setLatitude(12.345);
+		// co.setLongitude(23.564);
+		// tc1.setCoordinate(co);
+		// coorinates.add(tc1);
+		// coorinates.add(tc1);
+		// track.setTimeCoorinates(coorinates);
 		delivery.setTrack(track);
+		track.setDelivery(delivery);
 		order.setDelivery(delivery);
 		OrderPrice price = new OrderPrice();
 		price.setAmountPaid(120.50);

@@ -14,17 +14,22 @@ import com.hoteats.service.UserService;
 public class UserControllerImpl implements UserController {
 
 	@Autowired
-	private UserService userService;
+	private UserService service;
 
 	@Override
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
 	public User findByUserById(Long userId) {
-		return this.userService.findByUserById(userId);
+		return this.service.findByUserById(userId);
 	}
 
 	@RequestMapping(value = "/sampleuser", method = RequestMethod.GET)
 	public User testUser() {
 		return CommonStubs.testUser();
+	}
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public User addUser() {
+		return this.service.saveUser(CommonStubs.testUser());
 	}
 
 }

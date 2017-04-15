@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hoteats.models.audit.AuditInfo;
@@ -21,7 +21,7 @@ public class ItemOffer extends AuditInfo {
 	private Long itemOfferId;
 
 	@JsonBackReference
-	@OneToOne
+	@ManyToOne
 	private Item item;
 
 	@Column

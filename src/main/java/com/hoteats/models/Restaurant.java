@@ -2,8 +2,10 @@ package com.hoteats.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -23,11 +25,11 @@ public class Restaurant {
 	private String name;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "restaurant")
+	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<RestaurantAddress> branches;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "restaurant")
+	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Menu> menu;
 
 	public Long getRestaurantId() {
