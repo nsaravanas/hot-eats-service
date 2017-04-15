@@ -1,29 +1,28 @@
 package com.hoteats.models;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.envers.Audited;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.hoteats.models.Menu;
-import com.hoteats.models.audit.AuditInfo;
-import com.hoteats.models.enums.Category;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.hoteats.models.enums.ItemType;
 import com.hoteats.models.enums.Status;
 
 @Entity
-@Audited
-@EntityListeners(AuditingEntityListener.class)
-public class Item extends AuditInfo {
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+public class Item {
 
 	@Id
 	private Long itemId;
@@ -34,18 +33,50 @@ public class Item extends AuditInfo {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
-	@Enumerated(EnumType.STRING)
-	private Category category;
-
 	@ElementCollection
 	private Set<String> tags;
 
 	@Column
-	private Double price;
+	private BigDecimal price;
 
 	@JsonBackReference
 	@ManyToOne
 	private Menu menu;
+
+	@JsonManagedReference
+	@OneToOne
+	private ItemOffer itemOffer;
+
+	@Column
+	@Enumerated(EnumType.STRING)
+	private ItemType type;
+
+	@Column
+	private String description;
+
+	public ItemType getType() {
+		return type;
+	}
+
+	public void setType(ItemType type) {
+		this.type = type;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public ItemOffer getItemOffer() {
+		return itemOffer;
+	}
+
+	public void setItemOffer(ItemOffer itemOffer) {
+		this.itemOffer = itemOffer;
+	}
 
 	public Menu getMenu() {
 		return menu;
@@ -55,11 +86,11 @@ public class Item extends AuditInfo {
 		this.menu = menu;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
@@ -85,14 +116,6 @@ public class Item extends AuditInfo {
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 
 	public Set<String> getTags() {

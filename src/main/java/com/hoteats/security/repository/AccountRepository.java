@@ -8,6 +8,6 @@ import com.hoteats.security.model.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-	public Account findByUsername(String username);
+	Account findByUsername(String username);
 
 }

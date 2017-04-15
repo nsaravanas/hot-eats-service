@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
@@ -15,20 +14,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.envers.Audited;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.hoteats.models.Delivery;
-import com.hoteats.models.OrderItem;
-import com.hoteats.models.OrderPrice;
-import com.hoteats.models.User;
-import com.hoteats.models.audit.AuditInfo;
 import com.hoteats.models.enums.Status;
 
 @Entity
-@Audited
-@EntityListeners(AuditingEntityListener.class)
-public class Order extends AuditInfo {
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+public class Order {
 
 	@Id
 	private Long orderId;

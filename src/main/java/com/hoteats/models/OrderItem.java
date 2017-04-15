@@ -2,23 +2,18 @@ package com.hoteats.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.envers.Audited;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.hoteats.models.Item;
-import com.hoteats.models.Order;
-import com.hoteats.models.audit.AuditInfo;
 
 @Entity
-@Audited
-@EntityListeners(AuditingEntityListener.class)
-public class OrderItem extends AuditInfo {
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+public class OrderItem {
 
 	@Id
 	private Long id;
