@@ -15,11 +15,14 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.hoteats.models.User;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @JsonSubTypes.Type(value = ItemFeedback.class, name = "item"),
-		@JsonSubTypes.Type(value = OrdersFeedback.class, name = "orders"),
-		@JsonSubTypes.Type(value = RestaurantFeedback.class, name = "restaurant"),
-		@JsonSubTypes.Type(value = AppFeedback.class, name = "app") })
-
+@JsonSubTypes(
+		{ 
+			@JsonSubTypes.Type(value = ItemFeedback.class, name = "item"),
+			@JsonSubTypes.Type(value = OrdersFeedback.class, name = "orders"),
+			@JsonSubTypes.Type(value = RestaurantFeedback.class, name = "restaurant"),
+			@JsonSubTypes.Type(value = AppFeedback.class, name = "app") 
+		}
+)
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Feedback {
