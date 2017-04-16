@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.hoteats.common.review.AppFeedback;
+import com.hoteats.common.review.Feedback;
+import com.hoteats.common.review.ItemFeedback;
+import com.hoteats.common.review.OrdersFeedback;
+import com.hoteats.common.review.RestaurantFeedback;
 import com.hoteats.models.Address;
 import com.hoteats.models.Coordinate;
 import com.hoteats.models.Delivery;
@@ -240,6 +245,14 @@ public class CommonStubs {
 		items.add(oi1);
 		order.setOrderItems(items);
 		return order;
+	}
+
+	public static List<Feedback> sampleFeedbacks() {
+		ItemFeedback it = new ItemFeedback();
+		OrdersFeedback or = new OrdersFeedback();
+		AppFeedback ap = new AppFeedback();
+		RestaurantFeedback re = new RestaurantFeedback();
+		return Arrays.asList(it, or, ap, re);
 	}
 
 }

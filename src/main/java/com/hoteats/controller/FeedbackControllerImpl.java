@@ -1,16 +1,20 @@
 package com.hoteats.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hoteats.common.review.Feedback;
+import com.hoteats.commons.CommonStubs;
 import com.hoteats.service.FeedbackService;
 
 @RestController
-@RequestMapping("/feedback")
+@RequestMapping("/feedbacks")
 public class FeedbackControllerImpl implements FeedbackController {
 
 	@Autowired
@@ -34,4 +38,38 @@ public class FeedbackControllerImpl implements FeedbackController {
 		this.service.deleteFeedback(feedback);
 	}
 
+	@RequestMapping(value = "/sample", method = RequestMethod.GET)
+	public List<Feedback> feedbacks() {
+		return CommonStubs.sampleFeedbacks();
+	}
+
+	@Override
+	@RequestMapping(value = "/feedback/{feedbackId}", method = RequestMethod.GET)
+	public Feedback getFeedbackByFeedbackId(@PathVariable Long feedbackId) {
+		return this.service.getFeedbackByFeedbackId(feedbackId);
+	}
+
+	@Override
+	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+	public List<Feedback> getFeedbacksByUserId(@PathVariable Long userId) {
+		return this.service.getFeedbacksByUserId(userId);
+	}
+
+	@Override
+	@RequestMapping(value = "/item/{itemId}", method = RequestMethod.GET)
+	public List<Feedback> getFeedbacksByItemId(@PathVariable Long itemId) {
+		return this.service.getFeedbacksByItemId(itemId);
+	}
+
+	@Override
+	@RequestMapping(value = "/restaurant/{restaurantId}", method = RequestMethod.GET)
+	public List<Feedback> getFeedbacksByRestaurantId(@PathVariable Long restaurantId) {
+		return this.service.getFeedbacksByRestaurantId(restaurantId);
+	}
+
+	@Override
+	@RequestMapping(value = "/orders/{ordersId}", method = RequestMethod.GET)
+	public List<Feedback> getFeedbacksByOrdersId(@PathVariable Long ordersId) {
+		return this.service.getFeedbacksByOrdersId(ordersId);
+	}
 }

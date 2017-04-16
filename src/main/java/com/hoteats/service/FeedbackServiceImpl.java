@@ -1,5 +1,7 @@
 package com.hoteats.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,36 @@ public class FeedbackServiceImpl implements FeedbackService {
 	@Transactional
 	public void deleteFeedback(Feedback feedback) {
 		this.repository.delete(feedback);
+	}
+
+	@Override
+	@Transactional
+	public Feedback getFeedbackByFeedbackId(Long feedbackId) {
+		return this.repository.getFeedbackById(feedbackId);
+	}
+
+	@Override
+	@Transactional
+	public List<Feedback> getFeedbacksByRestaurantId(Long restaurantId) {
+		return this.repository.getFeedbacksByRestaurantId(restaurantId);
+	}
+
+	@Override
+	@Transactional
+	public List<Feedback> getFeedbacksByOrdersId(Long ordersId) {
+		return this.repository.getFeedbacksByOrdersId(ordersId);
+	}
+
+	@Override
+	@Transactional
+	public List<Feedback> getFeedbacksByItemId(Long itemId) {
+		return this.repository.getFeedbacksByItemId(itemId);
+	}
+
+	@Override
+	@Transactional
+	public List<Feedback> getFeedbacksByUserId(Long userId) {
+		return this.repository.getFeedbacksByUserId(userId);
 	}
 
 }

@@ -8,14 +8,20 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.hoteats.models.User;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({ @JsonSubTypes.Type(value = ItemFeedback.class, name = "item"),
+		@JsonSubTypes.Type(value = OrdersFeedback.class, name = "orders"),
+		@JsonSubTypes.Type(value = RestaurantFeedback.class, name = "restaurant"),
+		@JsonSubTypes.Type(value = AppFeedback.class, name = "app") })
+
 @Entity
-@Table(name = "FEEDBACK")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Feedback {
+public abstract class Feedback {
 
 	@Id
 	private Long id;
@@ -29,8 +35,10 @@ public class Feedback {
 	@Column
 	private Integer rating;
 
+	@Column
 	private LocalDateTime addedOn;
 
+	@Column
 	private LocalDateTime updatedOn;
 
 	public Integer getRating() {
