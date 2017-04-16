@@ -4,14 +4,21 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-import com.hoteats.models.Coordinate;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Location {
 
 	@Id
-	private Long id;
+	private Long locationId;
+
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(nullable = false, name = "ADDRESS_ID")
+	private Address address;
 
 	@Column
 	private String title;
@@ -33,12 +40,12 @@ public class Location {
 		this.coordinate = coordinate;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getLocationId() {
+		return locationId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setLocationId(Long locationId) {
+		this.locationId = locationId;
 	}
 
 	public String getTitle() {
@@ -65,4 +72,11 @@ public class Location {
 		this.landmark = landmark;
 	}
 
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 }

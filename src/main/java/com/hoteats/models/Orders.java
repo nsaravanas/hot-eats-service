@@ -39,6 +39,7 @@ public class Orders {
 	@Column
 	private LocalDateTime updatedOn;
 
+	@Column
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
@@ -50,6 +51,7 @@ public class Orders {
 
 	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(nullable = false, name = "DELIVERY_ID")
 	private Delivery delivery;
 
 	public Delivery getDelivery() {

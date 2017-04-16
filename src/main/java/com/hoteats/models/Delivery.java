@@ -27,7 +27,7 @@ public class Delivery {
 	private Long contactNo;
 
 	@JsonManagedReference
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)	
 	private Track track;
 
 	@Column

@@ -1,11 +1,22 @@
 package com.hoteats.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
-@Embeddable
-public class Address {
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Address {
+
+	@Id
+	private Long addressId;
 
 	@Column
 	private String doorNo;
@@ -28,15 +39,24 @@ public class Address {
 	@Column
 	private String addressName;
 
-	@Embedded
-	private Coordinate coordinate;
+	@JsonManagedReference
+	@OneToOne(mappedBy = "address", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Location location;
 
-	public Coordinate getCoordinate() {
-		return coordinate;
+	public Long getAddressId() {
+		return addressId;
 	}
 
-	public void setCoordinate(Coordinate coordinate) {
-		this.coordinate = coordinate;
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 
 	public String getDoorNo() {
