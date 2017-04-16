@@ -2,6 +2,7 @@ package com.hoteats.service;
 
 import java.util.List;
 
+import com.hoteats.models.Coordinate;
 import com.hoteats.models.Restaurant;
 
 public interface RestaurantService {
@@ -11,5 +12,15 @@ public interface RestaurantService {
 	List<Restaurant> getAllRestaurants();
 
 	Restaurant saveRestaurant(Restaurant testRestaurant);
+
+	Restaurant addRestaurant(Restaurant restaurant);
+
+	Restaurant updateRestaurant(Restaurant restaurant);
+
+	void deleteRestaurant(Long restaurantId);
+
+	List<Restaurant> restaurantsByGeo(Coordinate coordinate);
+
+	List<Restaurant> restaurantsByLocation(String location);
 
 }

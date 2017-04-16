@@ -168,7 +168,7 @@ public class CommonStubs {
 	public static User testUser() {
 		User user = new User();
 		user.setEmailId("tester@domain.com");
-		user.setMobileNo(9999999999L);
+		user.setMobileNo("9999999999");
 		user.setUserId(1L);
 		user.setUserName("tester");
 		user.setUserSince(LocalDateTime.of(2017, 4, 1, 0, 0));

@@ -6,11 +6,19 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.hoteats.models.enums.UserStatus;
 
 @Entity
 public class User {
@@ -19,12 +27,18 @@ public class User {
 	private Long userId;
 
 	@Column
+	@NotNull
+	@NotEmpty
+	@Length(min = 6)
 	private String userName;
 
 	@Column
-	private Long mobileNo;
+	@NotNull
+	@Length(min = 10, max = 10)
+	private String mobileNo;
 
 	@Column
+	@Email
 	private String emailId;
 
 	@Column
@@ -33,6 +47,18 @@ public class User {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<UserAddress> userAddress;
+
+	@Column
+	@Enumerated(EnumType.STRING)
+	private UserStatus status;
+
+	public UserStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(UserStatus status) {
+		this.status = status;
+	}
 
 	public Long getUserId() {
 		return userId;
@@ -50,11 +76,11 @@ public class User {
 		this.userName = userName;
 	}
 
-	public Long getMobileNo() {
+	public String getMobileNo() {
 		return mobileNo;
 	}
 
-	public void setMobileNo(Long mobileNo) {
+	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
 
