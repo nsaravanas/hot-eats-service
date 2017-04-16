@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -16,6 +17,7 @@ public class UserAddress {
 
 	@JsonBackReference
 	@ManyToOne
+	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
 	@Embedded

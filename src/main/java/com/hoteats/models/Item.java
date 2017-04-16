@@ -11,6 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -40,10 +41,11 @@ public class Item {
 
 	@JsonBackReference
 	@ManyToOne
+	@JoinColumn(name = "id", nullable = false)
 	private Menu menu;
 
 	@JsonManagedReference
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private ItemOffer offer;
 
 	@Column

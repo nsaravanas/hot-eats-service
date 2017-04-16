@@ -1,6 +1,7 @@
 package com.hoteats.common.review;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -11,6 +12,7 @@ import com.hoteats.models.Item;
 public class ItemFeedback extends Feedback {
 
 	@ManyToOne
+	@JoinColumn(name = "itemId", nullable = false)
 	private Item item;
 
 	public Item getItem() {

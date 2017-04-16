@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -19,11 +20,12 @@ public class Track {
 	private Long trackId;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "track", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "track", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<TimeCoorinate> timeCoorinates;
 
 	@JsonBackReference
 	@ManyToOne
+	@JoinColumn(name = "deliveryId", nullable = false)
 	private Delivery delivery;
 
 	public Delivery getDelivery() {

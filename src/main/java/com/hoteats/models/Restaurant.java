@@ -25,7 +25,7 @@ public class Restaurant {
 	private List<RestaurantAddress> branches;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Menu> menu;
 
 	public Long getRestaurantId() {

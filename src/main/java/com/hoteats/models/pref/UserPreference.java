@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -17,6 +18,7 @@ public class UserPreference {
 	private Long id;
 
 	@ManyToOne
+	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
 	@OneToMany

@@ -3,6 +3,7 @@ package com.hoteats.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -16,10 +17,12 @@ public class OrderItem {
 
 	@JsonBackReference
 	@ManyToOne
+	@JoinColumn(name = "orderId", nullable = false)
 	private Orders orders;
 
 	@JsonManagedReference
 	@ManyToOne
+	@JoinColumn(name = "itemId", nullable = false)
 	private Item item;
 
 	@Column

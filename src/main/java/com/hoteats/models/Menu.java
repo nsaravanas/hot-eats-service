@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -17,14 +18,15 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Menu {
 
 	@Id
-	private Long id;
+	private Long menuId;
 
 	@JsonBackReference
 	@ManyToOne
+	@JoinColumn(name = "restaurantId", nullable = false)
 	private Restaurant restaurant;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Item> items;
 
 	@Column
@@ -38,12 +40,12 @@ public class Menu {
 		this.name = name;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getMenuId() {
+		return menuId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setMenuId(Long menuId) {
+		this.menuId = menuId;
 	}
 
 	public Restaurant getRestaurant() {

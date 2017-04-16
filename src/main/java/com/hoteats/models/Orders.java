@@ -11,6 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -25,10 +26,11 @@ public class Orders {
 	private Long orderId;
 
 	@ManyToOne
+	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<OrderItem> orderItems;
 
 	@Column
@@ -47,7 +49,7 @@ public class Orders {
 	private OrderPrice orderPrice;
 
 	@JsonManagedReference
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Delivery delivery;
 
 	public Delivery getDelivery() {

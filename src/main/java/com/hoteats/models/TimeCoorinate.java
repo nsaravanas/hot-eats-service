@@ -6,11 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.hoteats.models.Coordinate;
-import com.hoteats.models.Track;
 
 @Entity
 public class TimeCoorinate {
@@ -20,6 +19,7 @@ public class TimeCoorinate {
 
 	@JsonBackReference
 	@ManyToOne
+	@JoinColumn(name = "trackId", nullable = false)
 	private Track track;
 
 	@Column

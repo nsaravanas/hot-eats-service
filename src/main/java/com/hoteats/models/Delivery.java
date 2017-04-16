@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -26,7 +27,7 @@ public class Delivery {
 	private Long contactNo;
 
 	@JsonManagedReference
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Track track;
 
 	@Column
@@ -39,10 +40,12 @@ public class Delivery {
 	private LocalDate registrationDate;
 
 	@ManyToOne
+	@JoinColumn(name = "userAddressId", nullable = false)
 	private UserAddress address;
 
 	@JsonBackReference
 	@ManyToOne
+	@JoinColumn(name = "orderId", nullable = false)
 	private Orders orders;
 
 	public Track getTrack() {

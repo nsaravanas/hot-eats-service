@@ -31,7 +31,7 @@ public class User {
 	private LocalDateTime userSince;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<UserAddress> userAddress;
 
 	public Long getUserId() {

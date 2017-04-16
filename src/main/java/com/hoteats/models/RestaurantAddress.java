@@ -3,6 +3,7 @@ package com.hoteats.models;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -15,6 +16,7 @@ public class RestaurantAddress {
 
 	@JsonBackReference
 	@ManyToOne
+	@JoinColumn(name = "restaurantId", nullable = false)
 	private Restaurant restaurant;
 
 	@Embedded

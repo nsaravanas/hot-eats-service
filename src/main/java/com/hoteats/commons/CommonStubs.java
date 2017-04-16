@@ -48,7 +48,7 @@ public class CommonStubs {
 		r.setRestaurantId(100L);
 		List<Menu> menu = new ArrayList<>();
 		Menu m1 = new Menu();
-		m1.setId(1L);
+		m1.setMenuId(1L);
 		m1.setRestaurant(r);
 		List<Item> items = new ArrayList<>();
 		Item i1 = new Item();
@@ -89,7 +89,7 @@ public class CommonStubs {
 		branches.add(ra1);
 		r.setBranches(branches);
 		Menu m2 = new Menu();
-		m2.setId(2L);
+		m2.setMenuId(2L);
 		m2.setRestaurant(r);
 		List<Item> it = items();
 		it.stream().forEach(i -> i.setMenu(m2));
