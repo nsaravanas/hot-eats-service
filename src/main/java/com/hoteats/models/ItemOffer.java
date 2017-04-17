@@ -8,10 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hoteats.models.enums.OfferType;
 
 @Entity
@@ -19,11 +16,6 @@ public class ItemOffer {
 
 	@Id
 	private Long itemOfferId;
-
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "itemId", nullable = false)
-	private Item item;
 
 	@Column
 	private LocalDateTime offerFrom;
@@ -55,14 +47,6 @@ public class ItemOffer {
 
 	public void setItemOfferId(Long itemOfferId) {
 		this.itemOfferId = itemOfferId;
-	}
-
-	public Item getItem() {
-		return item;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
 	}
 
 	public LocalDateTime getOfferFrom() {

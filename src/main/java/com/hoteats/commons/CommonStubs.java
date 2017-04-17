@@ -60,7 +60,7 @@ public class CommonStubs {
 		of1.setItemOfferId(100L);
 		of1.setFlatDiscount(new BigDecimal(200.0));
 		of1.setOfferPercentage(new BigDecimal(10.0));
-		of1.setItem(i1);
+		// of1.setItem(i1);
 		of1.setOfferFrom(LocalDateTime.of(2017, 01, 01, 00, 00, 00));
 		of1.setOfferTill(LocalDateTime.of(2017, 12, 31, 00, 00, 00));
 		of1.setOfferType(OfferType.PERCENTAGE);
@@ -84,17 +84,17 @@ public class CommonStubs {
 		ra1.setState("Tamilnadu");
 		ra1.setSteet("test");
 		ra1.setZipCode(600002);
-		Location l1 = new Location();
-		l1.setAddress(ra1);
-		l1.setDescription("RR Briyani medavakkam");
-		l1.setLandmark("near medavakkam arch");
-		l1.setLocationId(1l);
-		l1.setTitle("RR Location");
-		Coordinate co = new Coordinate();
-		co.setLatitude(1.123);
-		co.setLongitude(2.234);
-		l1.setCoordinate(co);
-		ra1.setLocation(l1);
+		// Location l1 = new Location();
+		// l1.setAddress(ra1);
+		// l1.setDescription("RR Briyani medavakkam");
+		// l1.setLandmark("near medavakkam arch");
+		// l1.setLocationId(1l);
+		// l1.setTitle("RR Location");
+		// Coordinate co = new Coordinate();
+		// co.setLatitude(1.123);
+		// co.setLongitude(2.234);
+		// l1.setCoordinate(co);
+		// ra1.setLocation(l1);
 		branches.add(ra1);
 		r.setBranches(branches);
 		Menu m2 = new Menu();
@@ -143,7 +143,7 @@ public class CommonStubs {
 		i1.setPrice(new BigDecimal(Double.parseDouble(price)));
 		i1.setStatus(Status.AVAILABLE);
 		i1.setOffer(randomOffers(id, Double.parseDouble(price)));
-		i1.getOffer().setItem(i1);
+		// i1.getOffer().setItem(i1);
 		return i1;
 	}
 
@@ -184,7 +184,6 @@ public class CommonStubs {
 		ua1.setState("TN");
 		ua1.setSteet("Test Street");
 		ua1.setZipCode(600001);
-		addresses.add(ua1);
 		UserAddress ua2 = new UserAddress();
 		ua2.setAddressId(2L);
 		ua2.setUser(user);
@@ -196,6 +195,18 @@ public class CommonStubs {
 		ua2.setState("Tamilnadu");
 		ua2.setSteet("Test Street");
 		ua2.setZipCode(600002);
+		Location l1 = new Location();
+		l1.setAddress(ua2);
+		l1.setDescription("RR Briyani medavakkam");
+		l1.setLandmark("near medavakkam arch");
+		l1.setLocationId(1l);
+		l1.setTitle("RR Location");
+		Coordinate co = new Coordinate();
+		co.setLatitude(1.123);
+		co.setLongitude(2.234);
+		l1.setCoordinate(co);
+		ua2.setLocation(l1);
+		addresses.add(ua1);
 		addresses.add(ua2);
 		user.setUserAddress(addresses);
 		return user;
@@ -246,7 +257,6 @@ public class CommonStubs {
 		oi1.setItem(testRestaurant().getMenu().get(0).getItems().get(0));
 		oi1.setPrice(130.54);
 		oi1.setQuantity(4);
-		items.add(oi1);
 		items.add(oi1);
 		order.setOrderItems(items);
 		return order;

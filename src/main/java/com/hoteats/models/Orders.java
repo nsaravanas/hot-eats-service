@@ -30,7 +30,7 @@ public class Orders {
 	private User user;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<OrderItem> orderItems;
 
 	@Column
@@ -50,8 +50,7 @@ public class Orders {
 	private OrderPrice orderPrice;
 
 	@JsonManagedReference
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(nullable = false, name = "DELIVERY_ID")
+	@OneToOne(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Delivery delivery;
 
 	public Delivery getDelivery() {

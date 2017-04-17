@@ -13,10 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hoteats.models.enums.ItemType;
 import com.hoteats.models.enums.Status;
 
@@ -41,11 +39,11 @@ public class Item {
 
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "id", nullable = false)
+	@JoinColumn(name = "menuId", nullable = false)
 	private Menu menu;
 
-	@JsonManagedReference
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "itemOfferId", nullable = true)
 	private ItemOffer offer;
 
 	@Column

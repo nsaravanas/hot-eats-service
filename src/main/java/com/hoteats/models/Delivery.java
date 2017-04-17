@@ -28,7 +28,7 @@ public class Delivery {
 
 	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "trackId", nullable = false)
+	@JoinColumn(name = "trackId")
 	private Track track;
 
 	@Column
@@ -41,7 +41,7 @@ public class Delivery {
 	private LocalDate registrationDate;
 
 	@ManyToOne
-	@JoinColumn(name = "userAddressId", nullable = false)
+	@JoinColumn(name = "userAddressId")
 	private UserAddress address;
 
 	@JsonBackReference
