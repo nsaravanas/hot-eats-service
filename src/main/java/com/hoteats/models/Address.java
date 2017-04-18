@@ -7,7 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -40,7 +41,8 @@ public abstract class Address {
 	private String addressName;
 
 	@JsonManagedReference
-	@OneToOne(mappedBy = "address", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "locationId", nullable = true)
 	private Location location;
 
 	public Long getAddressId() {

@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 import com.hoteats.common.review.AppFeedback;
 import com.hoteats.common.review.Feedback;
@@ -60,7 +61,6 @@ public class CommonStubs {
 		of1.setItemOfferId(100L);
 		of1.setFlatDiscount(new BigDecimal(200.0));
 		of1.setOfferPercentage(new BigDecimal(10.0));
-		// of1.setItem(i1);
 		of1.setOfferFrom(LocalDateTime.of(2017, 01, 01, 00, 00, 00));
 		of1.setOfferTill(LocalDateTime.of(2017, 12, 31, 00, 00, 00));
 		of1.setOfferType(OfferType.PERCENTAGE);
@@ -84,17 +84,16 @@ public class CommonStubs {
 		ra1.setState("Tamilnadu");
 		ra1.setSteet("test");
 		ra1.setZipCode(600002);
-		// Location l1 = new Location();
-		// l1.setAddress(ra1);
-		// l1.setDescription("RR Briyani medavakkam");
-		// l1.setLandmark("near medavakkam arch");
-		// l1.setLocationId(1l);
-		// l1.setTitle("RR Location");
-		// Coordinate co = new Coordinate();
-		// co.setLatitude(1.123);
-		// co.setLongitude(2.234);
-		// l1.setCoordinate(co);
-		// ra1.setLocation(l1);
+		Location l1 = new Location();
+		l1.setDescription("RR Briyani medavakkam");
+		l1.setLandmark("near medavakkam arch");
+		l1.setLocationId(1l);
+		l1.setTitle("RR Location");
+		Coordinate co = new Coordinate();
+		co.setLatitude(1.123);
+		co.setLongitude(2.234);
+		l1.setCoordinate(co);
+		ra1.setLocation(l1);
 		branches.add(ra1);
 		r.setBranches(branches);
 		Menu m2 = new Menu();
@@ -104,8 +103,16 @@ public class CommonStubs {
 		it.stream().forEach(i -> i.setMenu(m2));
 		m2.setItems(it);
 		m2.setRestaurant(r);
+		Menu m3 = new Menu();
+		m3.setRestaurant(r);
+		m3.setMenuId(3L);
+		m3.setName("Eat Now");
+		List<Item> ite = items().stream().peek(i -> i.setItemId(i.getItemId() + 150)).peek(i -> i.setMenu(m3))
+				.peek(i -> i.getOffer().setItemOfferId(i.getItemId() + 150)).collect(Collectors.toList());
+		m3.setItems(ite);
 		menu.add(m1);
 		menu.add(m2);
+		menu.add(m3);
 		r.setMenu(menu);
 		return r;
 	}
@@ -120,14 +127,12 @@ public class CommonStubs {
 				+ "Idly + Egg Combo (4 Idly +1 Vada ) 4+1::40 \n" + "Idly+ Omlet Combo (4 idly +1 Omlet) 4+1::42 \n"
 				+ "Pongal + Vada Combo(1+1) 1+1::44 \n" + "Chappathi + Egg(3+1) 3+1::45 \n"
 				+ "Chappathi+Omlet(3+1) 3+1::46 \n";
-
 		String[] lines = itemsStr.split("\n");
 		List<Item> items = new ArrayList<>();
 		for (int i = 0; i < lines.length; i++) {
 			String[] arr = lines[i].split("::");
 			items.add(item(i, arr[0].trim(), arr[1].trim()));
 		}
-
 		return items;
 	}
 
@@ -196,10 +201,9 @@ public class CommonStubs {
 		ua2.setSteet("Test Street");
 		ua2.setZipCode(600002);
 		Location l1 = new Location();
-		l1.setAddress(ua2);
 		l1.setDescription("RR Briyani medavakkam");
 		l1.setLandmark("near medavakkam arch");
-		l1.setLocationId(1l);
+		l1.setLocationId(2l);
 		l1.setTitle("RR Location");
 		Coordinate co = new Coordinate();
 		co.setLatitude(1.123);

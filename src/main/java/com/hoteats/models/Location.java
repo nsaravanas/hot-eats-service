@@ -4,21 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Location {
 
 	@Id
 	private Long locationId;
-
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(nullable = false, name = "ADDRESS_ID")
-	private Address address;
 
 	@Column
 	private String title;
@@ -72,11 +63,4 @@ public class Location {
 		this.landmark = landmark;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
 }
