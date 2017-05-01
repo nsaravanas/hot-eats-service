@@ -37,6 +37,17 @@ public class Account {
 	@Column
 	private String lname;
 
+	public Account() {
+		super();
+	}
+
+	public Account(Long id, String username, String password) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+	}
+
 	public Long getId() {
 		return id;
 	}
