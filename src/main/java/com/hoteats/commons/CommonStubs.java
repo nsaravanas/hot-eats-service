@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ import com.hoteats.common.review.OrdersFeedback;
 import com.hoteats.common.review.RestaurantFeedback;
 import com.hoteats.models.Coordinate;
 import com.hoteats.models.Delivery;
+import com.hoteats.models.EatItem;
 import com.hoteats.models.Item;
 import com.hoteats.models.ItemOffer;
 import com.hoteats.models.Location;
@@ -117,6 +119,22 @@ public class CommonStubs {
 		return r;
 	}
 
+	public static List<EatItem> eatItems() {
+		return items().stream().map(CommonStubs::itemToEatItem).collect(Collectors.toList());
+	}
+
+	private static EatItem itemToEatItem(Item item) {
+		EatItem eatItem = new EatItem();
+		eatItem.setDescription(item.getDescription());
+		eatItem.setEatItemId(item.getItemId());
+		eatItem.setName(item.getName());
+		eatItem.setOffer(item.getOffer());
+		eatItem.setPrice(item.getPrice());
+		eatItem.setStatus(item.getStatus());
+		eatItem.setType(new Random().nextBoolean() ? ItemType.EAT_NOW : ItemType.EAT_LATER);
+		return eatItem;
+	}
+
 	public static List<Item> items() {
 
 		String itemsStr = "Idly 4::30 \n" + "Dosa 3::36 \n" + "Chappathi 3::36 \n" + "Puttu 3::36 \n"
@@ -161,11 +179,11 @@ public class CommonStubs {
 		LocalDateTime start = LocalDateTime.of(2017, 1, 1, 0, 0);
 		LocalDateTime end = LocalDateTime.of(2017, 12, 31, 0, 0);
 		ItemOffer o = new ItemOffer();
-		o.setFlatDiscount(new BigDecimal(ThreadLocalRandom.current().nextDouble(0, price)));
+		o.setFlatDiscount(new BigDecimal(ThreadLocalRandom.current().nextInt(0, (int) price)));
 		o.setItemOfferId((long) id);
 		o.setOfferFrom(start.plusDays(ThreadLocalRandom.current().nextLong(0, 30)));
 		o.setOfferTill(end.minusDays(ThreadLocalRandom.current().nextLong(0, 30)));
-		o.setOfferPercentage(new BigDecimal(ThreadLocalRandom.current().nextDouble(0, 50.0)));
+		o.setOfferPercentage(new BigDecimal(ThreadLocalRandom.current().nextInt(0, 50)));
 		o.setOfferType(ThreadLocalRandom.current().nextBoolean() ? OfferType.FLAT_DISCOUNT : OfferType.PERCENTAGE);
 		return o;
 	}
@@ -259,7 +277,7 @@ public class CommonStubs {
 		oi1.setId(12L);
 		oi1.setOrders(order);
 		oi1.setItem(testRestaurant().getMenu().get(0).getItems().get(0));
-		oi1.setPrice(130.54);
+		oi1.setPrice(BigDecimal.TEN);
 		oi1.setQuantity(4);
 		items.add(oi1);
 		order.setOrderItems(items);

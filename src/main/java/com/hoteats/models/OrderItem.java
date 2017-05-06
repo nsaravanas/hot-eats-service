@@ -1,5 +1,7 @@
 package com.hoteats.models;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,14 +24,19 @@ public class OrderItem {
 
 	@JsonManagedReference
 	@ManyToOne
-	@JoinColumn(name = "itemId", nullable = false)
+	@JoinColumn(name = "itemId", nullable = true)
 	private Item item;
+
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name = "eatItemId", nullable = true)
+	private EatItem eatItemId;
 
 	@Column
 	private Integer quantity;
 
 	@Column
-	private double price;
+	private BigDecimal price;
 
 	public Long getId() {
 		return id;
@@ -63,12 +70,19 @@ public class OrderItem {
 		this.quantity = quantity;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
+	public EatItem getEatItemId() {
+		return eatItemId;
+	}
+
+	public void setEatItemId(EatItem eatItemId) {
+		this.eatItemId = eatItemId;
+	}
 }
