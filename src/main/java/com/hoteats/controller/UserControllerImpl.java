@@ -32,19 +32,19 @@ public class UserControllerImpl implements UserController {
 		return CommonStubs.testUser();
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/load", method = RequestMethod.GET)
 	public User addTestUser() {
 		return this.service.saveUser(CommonStubs.testUser());
 	}
 
 	@Override
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public User addUser(@RequestBody User user) {
 		return this.service.addUser(user);
 	}
 
 	@Override
-	@RequestMapping(value = "/user", method = RequestMethod.PUT)
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public User updateUser(@RequestBody User user) {
 		return this.service.updateUser(user);
 	}
