@@ -9,13 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hoteats.models.enums.UserStatus;
@@ -24,21 +20,16 @@ import com.hoteats.models.enums.UserStatus;
 public class User {
 
 	@Id
+	@GeneratedValue
 	private Long userId;
 
 	@Column
-	@NotNull
-	@NotEmpty
-	@Length(min = 6)
 	private String userName;
 
 	@Column
-	@NotNull
-	@Length(min = 10, max = 10)
 	private String mobileNo;
 
 	@Column
-	@Email
 	private String emailId;
 
 	@Column
