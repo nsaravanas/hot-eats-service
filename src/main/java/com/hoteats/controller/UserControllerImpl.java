@@ -62,13 +62,13 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@Override
-	@RequestMapping(value = "/user/{userId}/address", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/{userId}/address/add", method = RequestMethod.POST)
 	public UserAddress addAddress(@PathVariable Long userId, @RequestBody UserAddress address) {
 		return this.service.addAddress(userId, address);
 	}
 
 	@Override
-	@RequestMapping(value = "/user/{userId}/address", method = RequestMethod.PUT)
+	@RequestMapping(value = "/user/{userId}/address/update", method = RequestMethod.PUT)
 	public UserAddress updateAddress(@PathVariable Long userId, @RequestBody UserAddress address) {
 		return this.service.updateAddress(userId, address);
 	}
