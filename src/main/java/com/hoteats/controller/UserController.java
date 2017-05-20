@@ -2,6 +2,7 @@ package com.hoteats.controller;
 
 import java.util.List;
 
+import com.hoteats.models.LoginResponse;
 import com.hoteats.models.User;
 import com.hoteats.models.UserAddress;
 
@@ -22,5 +23,7 @@ public interface UserController {
 	void deleteAddress(Long userId, Long addressId);
 
 	List<UserAddress> getAddress(Long userId);
+
+	LoginResponse authenticateUser(User user);
 
 }

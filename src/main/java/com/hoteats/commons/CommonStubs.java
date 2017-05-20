@@ -34,6 +34,7 @@ import com.hoteats.models.TimeCoorinate;
 import com.hoteats.models.Track;
 import com.hoteats.models.User;
 import com.hoteats.models.UserAddress;
+import com.hoteats.models.UserInfo;
 import com.hoteats.models.enums.ItemType;
 import com.hoteats.models.enums.ModeOfPay;
 import com.hoteats.models.enums.OfferType;
@@ -190,11 +191,13 @@ public class CommonStubs {
 
 	public static User testUser() {
 		User user = new User();
-		user.setEmailId("tester@domain.com");
-		user.setMobileNo("9999999999");
+		UserInfo userInfo = new UserInfo();
+		userInfo.setUserInfoId(1L);
+		userInfo.setEmailId("tester@domain.com");
+		userInfo.setMobileNo("9999999999");
 		user.setUserId(1L);
-		user.setUserName("tester");
-		user.setUserSince(LocalDateTime.of(2017, 4, 1, 0, 0));
+		user.setUsername("tester");
+		userInfo.setUserSince(LocalDateTime.of(2017, 4, 1, 0, 0));
 		List<UserAddress> addresses = new ArrayList<UserAddress>();
 		UserAddress ua1 = new UserAddress();
 		ua1.setAddressId(1L);
@@ -230,7 +233,9 @@ public class CommonStubs {
 		ua2.setLocation(l1);
 		addresses.add(ua1);
 		addresses.add(ua2);
-		user.setUserAddress(addresses);
+		userInfo.setUserAddress(addresses);
+		userInfo.setUser(user);
+		user.setUserInfo(userInfo);
 		return user;
 	}
 
@@ -244,7 +249,7 @@ public class CommonStubs {
 		order.setUser(testUser());
 		Delivery delivery = new Delivery();
 		delivery.setDeliveryId(10L);
-		delivery.setAddress(testUser().getUserAddress().get(0));
+		delivery.setAddress(testUser().getUserInfo().getUserAddress().get(0));
 		delivery.setBikeNo("TN14 X1234");
 		delivery.setBoxId("123");
 		delivery.setContactNo(9513572580L);

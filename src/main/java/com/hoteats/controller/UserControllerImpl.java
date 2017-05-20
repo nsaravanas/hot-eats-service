@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hoteats.commons.CommonStubs;
+import com.hoteats.models.LoginResponse;
 import com.hoteats.models.User;
 import com.hoteats.models.UserAddress;
 import com.hoteats.service.UserService;
@@ -23,7 +24,7 @@ public class UserControllerImpl implements UserController {
 
 	@Override
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-	public User findByUserById(Long userId) {
+	public User findByUserById(@PathVariable Long userId) {
 		return this.service.findByUserById(userId);
 	}
 
@@ -77,6 +78,12 @@ public class UserControllerImpl implements UserController {
 	@RequestMapping(value = "/user/{userId}/address/{addressId}", method = RequestMethod.DELETE)
 	public void deleteAddress(@PathVariable Long userId, @PathVariable Long addressId) {
 		this.service.deleteAddress(userId, addressId);
+	}
+
+	@Override
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public LoginResponse authenticateUser(@RequestBody User user) {
+		return this.service.authenticateUser(user);
 	}
 
 }

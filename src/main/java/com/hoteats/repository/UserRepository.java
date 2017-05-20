@@ -18,4 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query("from UserAddress where userId = ?1")
 	List<UserAddress> getAddress(Long userId);
 
+	User getUserByUsernameAndPassword(String userame, String password);
+
 }

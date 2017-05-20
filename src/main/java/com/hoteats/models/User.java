@@ -1,20 +1,14 @@
 package com.hoteats.models;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.hoteats.models.enums.UserStatus;
 
 @Entity
 public class User {
@@ -24,32 +18,14 @@ public class User {
 	private Long userId;
 
 	@Column
-	private String userName;
+	private String username;
 
 	@Column
-	private String mobileNo;
-
-	@Column
-	private String emailId;
-
-	@Column
-	private LocalDateTime userSince;
+	private String password;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<UserAddress> userAddress;
-
-	@Column
-	@Enumerated(EnumType.STRING)
-	private UserStatus status;
-
-	public UserStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(UserStatus status) {
-		this.status = status;
-	}
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	private UserInfo userInfo;
 
 	public Long getUserId() {
 		return userId;
@@ -59,44 +35,28 @@ public class User {
 		this.userId = userId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getMobileNo() {
-		return mobileNo;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getEmailId() {
-		return emailId;
+	public UserInfo getUserInfo() {
+		return userInfo;
 	}
 
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
-
-	public LocalDateTime getUserSince() {
-		return userSince;
-	}
-
-	public void setUserSince(LocalDateTime userSince) {
-		this.userSince = userSince;
-	}
-
-	public List<UserAddress> getUserAddress() {
-		return userAddress;
-	}
-
-	public void setUserAddress(List<UserAddress> userAddress) {
-		this.userAddress = userAddress;
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
 	}
 
 }

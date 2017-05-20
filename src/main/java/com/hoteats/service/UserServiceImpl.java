@@ -7,8 +7,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hoteats.models.LoginResponse;
 import com.hoteats.models.User;
 import com.hoteats.models.UserAddress;
+import com.hoteats.models.UserInfo;
+import com.hoteats.models.enums.LoginStatus;
 import com.hoteats.repository.UserRepository;
 
 @Service
@@ -70,6 +73,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserAddress> getAddress(Long userId) {
 		return this.repository.getAddress(userId);
+	}
+
+	@Override
+	public LoginResponse authenticateUser(User user) {
+		LoginResponse ret = new LoginResponse();
+		User response = this.repository.getUserByUsernameAndPassword(user.getUsername(), user.getPassword());
+		if (response != null) {
+			ret.setStatus(LoginStatus.SUCCESS);
+			ret.setUserame(response.getUsername());
+			ret.setUserId(response.getUserId());
+			UserInfo info = response.getUserInfo();
+			if (info != null)
+				ret.setName(info.getFirstName());
+		}
+		return ret;
 	}
 
 }
