@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.NaturalId;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -17,7 +19,8 @@ public class User {
 	@GeneratedValue
 	private Long userId;
 
-	@Column
+	@Column(unique = true, nullable = false)
+	@NaturalId
 	private String username;
 
 	@Column

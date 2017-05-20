@@ -4,7 +4,7 @@ import com.hoteats.models.enums.LoginStatus;
 
 public class LoginResponse {
 
-	private Long userId = Long.MIN_VALUE;
+	private Long userId = -1L;
 	private String userame;
 	private String name;
 	private LoginStatus status = LoginStatus.FAILED;
