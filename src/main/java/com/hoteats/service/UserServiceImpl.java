@@ -59,14 +59,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public UserAddress addAddress(Long userId, UserAddress address) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	@Transactional
 	public UserAddress updateAddress(Long userId, UserAddress address) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -88,6 +86,12 @@ public class UserServiceImpl implements UserService {
 				ret.setName(info.getFirstName());
 		}
 		return ret;
+	}
+
+	@Override
+	@Transactional
+	public User findByUsername(String username) {
+		return this.repository.findUserByUsername(username);
 	}
 
 }

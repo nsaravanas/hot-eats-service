@@ -1,1 +1,0 @@
-insert into account (id, username, password) values (1, 'admin', 'admin');

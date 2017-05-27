@@ -28,4 +28,6 @@ public interface UserService {
 
 	LoginResponse authenticateUser(User user);
 
+	User findByUsername(String username);
+
 }

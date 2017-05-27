@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -120,11 +119,11 @@ public class CommonStubs {
 		return r;
 	}
 
-	public static List<EatItem> eatItems() {
-		return items().stream().map(CommonStubs::itemToEatItem).collect(Collectors.toList());
+	public static List<EatItem> eatItems(ItemType itemType) {
+		return items().stream().map(i -> itemToEatItem(i, itemType)).collect(Collectors.toList());
 	}
 
-	private static EatItem itemToEatItem(Item item) {
+	private static EatItem itemToEatItem(Item item, ItemType itemType) {
 		EatItem eatItem = new EatItem();
 		eatItem.setDescription(item.getDescription());
 		eatItem.setEatItemId(item.getItemId());
@@ -132,7 +131,7 @@ public class CommonStubs {
 		eatItem.setOffer(item.getOffer());
 		eatItem.setPrice(item.getPrice());
 		eatItem.setStatus(item.getStatus());
-		eatItem.setType(new Random().nextBoolean() ? ItemType.EAT_NOW : ItemType.EAT_LATER);
+		eatItem.setType(itemType);
 		return eatItem;
 	}
 

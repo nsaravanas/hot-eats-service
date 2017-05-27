@@ -1,8 +1,14 @@
 package com.hoteats.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,15 +39,26 @@ public class UserControllerImpl implements UserController {
 		return CommonStubs.testUser();
 	}
 
-	@RequestMapping(value = "/load", method = RequestMethod.GET)
+	@PostConstruct
 	public User addTestUser() {
 		return this.service.saveUser(CommonStubs.testUser());
 	}
 
 	@Override
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public User addUser(@RequestBody User user) {
-		return this.service.addUser(user);
+	public ResponseEntity<?> addUser(@RequestBody User user) {
+		if (findByUsername(user.getUsername()) == null) {
+			return new ResponseEntity<User>(this.service.addUser(user), HttpStatus.CREATED);
+		}
+		Map<String, Object> response = new HashMap<>();
+		response.put("error", "username already exist");
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+	}
+
+	@Override
+	@RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
+	public User findByUsername(@PathVariable String username) {
+		return this.service.findByUsername(username);
 	}
 
 	@Override
