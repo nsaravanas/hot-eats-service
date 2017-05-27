@@ -126,7 +126,7 @@ public class CommonStubs {
 	private static EatItem itemToEatItem(Item item, ItemType itemType) {
 		EatItem eatItem = new EatItem();
 		eatItem.setDescription(item.getDescription());
-		eatItem.setEatItemId(item.getItemId());
+//		eatItem.setEatItemId(item.getItemId());
 		eatItem.setName(item.getName());
 		eatItem.setOffer(item.getOffer());
 		eatItem.setPrice(item.getPrice());
