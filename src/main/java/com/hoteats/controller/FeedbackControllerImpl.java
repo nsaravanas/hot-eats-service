@@ -38,9 +38,9 @@ public class FeedbackControllerImpl implements FeedbackController {
 		this.service.deleteFeedback(feedback);
 	}
 
-	@RequestMapping(value = "/sample", method = RequestMethod.GET)
+	@RequestMapping(value = "/load", method = RequestMethod.GET)
 	public List<Feedback> feedbacks() {
-		return CommonStubs.sampleFeedbacks();
+		return this.service.addFeedbacks(CommonStubs.sampleFeedbacks());
 	}
 
 	@Override

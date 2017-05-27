@@ -60,7 +60,7 @@ public class CommonStubs {
 		i1.setPrice(new BigDecimal("45.50"));
 		i1.setStatus(Status.PLACED);
 		ItemOffer of1 = new ItemOffer();
-		of1.setItemOfferId(100L);
+		// of1.setItemOfferId(100L);
 		of1.setFlatDiscount(new BigDecimal(200.0));
 		of1.setOfferPercentage(new BigDecimal(10.0));
 		of1.setOfferFrom(LocalDateTime.of(2017, 01, 01, 00, 00, 00));
@@ -110,7 +110,9 @@ public class CommonStubs {
 		m3.setMenuId(3L);
 		m3.setName("Eat Now");
 		List<Item> ite = items().stream().peek(i -> i.setItemId(i.getItemId() + 150)).peek(i -> i.setMenu(m3))
-				.peek(i -> i.getOffer().setItemOfferId(i.getItemId() + 150)).collect(Collectors.toList());
+				/*
+				 * .peek(i -> i.getOffer().setItemOfferId(i.getItemId() + 150))
+				 */.collect(Collectors.toList());
 		m3.setItems(ite);
 		menu.add(m1);
 		menu.add(m2);
@@ -126,7 +128,7 @@ public class CommonStubs {
 	private static EatItem itemToEatItem(Item item, ItemType itemType) {
 		EatItem eatItem = new EatItem();
 		eatItem.setDescription(item.getDescription());
-//		eatItem.setEatItemId(item.getItemId());
+		// eatItem.setEatItemId(item.getItemId());
 		eatItem.setName(item.getName());
 		eatItem.setOffer(item.getOffer());
 		eatItem.setPrice(item.getPrice());
@@ -180,7 +182,7 @@ public class CommonStubs {
 		LocalDateTime end = LocalDateTime.of(2017, 12, 31, 0, 0);
 		ItemOffer o = new ItemOffer();
 		o.setFlatDiscount(new BigDecimal(ThreadLocalRandom.current().nextInt(0, (int) price)));
-		o.setItemOfferId((long) id);
+		// o.setItemOfferId((long) id);
 		o.setOfferFrom(start.plusDays(ThreadLocalRandom.current().nextLong(0, 30)));
 		o.setOfferTill(end.minusDays(ThreadLocalRandom.current().nextLong(0, 30)));
 		o.setOfferPercentage(new BigDecimal(ThreadLocalRandom.current().nextInt(0, 50)));
@@ -290,10 +292,31 @@ public class CommonStubs {
 
 	public static List<Feedback> sampleFeedbacks() {
 		ItemFeedback it = new ItemFeedback();
+		Item i = new Item();
+		i.setItemId(100L);
+		it.setItem(i);
 		OrdersFeedback or = new OrdersFeedback();
+		Orders o = new Orders();
+		o.setOrderId(10L);
+		or.setOrders(o);
 		AppFeedback ap = new AppFeedback();
+		ap.setFeature("UI");
+		ap.setFeedbacks("Looks Good");
 		RestaurantFeedback re = new RestaurantFeedback();
-		return Arrays.asList(it, or, ap, re);
+		Restaurant r = new Restaurant();
+		r.setRestaurantId(100L);
+		re.setRestaurant(r);
+		List<Feedback> feedbacks = Arrays.asList(it, or, ap, re);
+		User u = new User();
+		u.setUserId(1L);
+		for (Feedback feedback : feedbacks) {
+			feedback.setAddedOn(LocalDateTime.now().minusDays(1));
+			feedback.setRating(4);
+			feedback.setReview("Good");
+			feedback.setUpdatedOn(LocalDateTime.now());
+			feedback.setUser(u);
+		}
+		return feedbacks;
 	}
 
 }

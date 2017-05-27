@@ -64,4 +64,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 		return this.repository.getFeedbacksByUserId(userId);
 	}
 
+	@Override
+	@Transactional
+	public List<Feedback> addFeedbacks(List<Feedback> feedbacks) {
+		return this.repository.save(feedbacks);
+	}
+
 }

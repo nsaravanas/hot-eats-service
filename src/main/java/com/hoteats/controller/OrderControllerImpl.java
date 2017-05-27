@@ -56,9 +56,9 @@ public class OrderControllerImpl implements OrderController {
 		return this.service.ordersByUserId(userId);
 	}
 
-	@RequestMapping(value = "/sampleorder", method = RequestMethod.GET)
+	@RequestMapping(value = "/load", method = RequestMethod.GET)
 	public Orders testOrder() {
-		return CommonStubs.testOrder();
+		return this.service.addOrder(CommonStubs.testOrder());
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)

@@ -6,6 +6,8 @@ import com.hoteats.common.review.Feedback;
 
 public interface FeedbackService {
 
+	List<Feedback> addFeedbacks(List<Feedback> feedbacks);
+
 	Feedback addFeedback(Feedback feedback);
 
 	Feedback updateFeedback(Feedback feedback);

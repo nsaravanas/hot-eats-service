@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hoteats.commons.CommonStubs;
@@ -39,7 +38,7 @@ public class UserControllerImpl implements UserController {
 		return CommonStubs.testUser();
 	}
 
-	@PostConstruct
+	@RequestMapping(value = "/load", method = RequestMethod.GET)
 	public User addTestUser() {
 		return this.service.saveUser(CommonStubs.testUser());
 	}
@@ -56,8 +55,8 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@Override
-	@RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
-	public User findByUsername(@PathVariable String username) {
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public User findByUsername(@RequestParam String username) {
 		return this.service.findByUsername(username);
 	}
 

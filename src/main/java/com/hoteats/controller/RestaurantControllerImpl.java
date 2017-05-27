@@ -62,9 +62,9 @@ public class RestaurantControllerImpl implements RestaurantController {
 		return this.service.getAllRestaurants();
 	}
 
-	@RequestMapping(value = "/samplerestaurant", method = RequestMethod.GET)
+	@RequestMapping(value = "/load", method = RequestMethod.GET)
 	public Restaurant testRestaurant() {
-		return CommonStubs.testRestaurant();
+		return this.service.addRestaurant(CommonStubs.testRestaurant());
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
