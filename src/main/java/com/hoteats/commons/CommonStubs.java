@@ -202,7 +202,7 @@ public class CommonStubs {
 		List<UserAddress> addresses = new ArrayList<UserAddress>();
 		UserAddress ua1 = new UserAddress();
 		ua1.setAddressId(1L);
-		ua1.setUser(user);
+		ua1.setUserInfo(userInfo);
 		ua1.setDefault(false);
 		ua1.setAddressName("Home-1");
 		ua1.setCity("Chennai");
@@ -213,7 +213,7 @@ public class CommonStubs {
 		ua1.setZipCode(600001);
 		UserAddress ua2 = new UserAddress();
 		ua2.setAddressId(2L);
-		ua2.setUser(user);
+		ua2.setUserInfo(userInfo);
 		ua2.setDefault(true);
 		ua2.setAddressName("Home-2");
 		ua2.setCity("Chennai");

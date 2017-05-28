@@ -28,6 +28,6 @@ public interface UserController {
 
 	LoginResponse authenticateUser(User user);
 
-	User findByUsername(String username);
+	ResponseEntity<?> findByUsername(String username);
 
 }

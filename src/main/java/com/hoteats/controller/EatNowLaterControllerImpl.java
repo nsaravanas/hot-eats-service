@@ -2,8 +2,6 @@ package com.hoteats.controller;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,7 +31,7 @@ public class EatNowLaterControllerImpl implements EatNowLaterController {
 		return this.service.getItems(ItemType.EAT_LATER);
 	}
 
-	@PostConstruct
+	@RequestMapping(value = "/load", method = RequestMethod.GET)
 	public void loadSampleData() {
 		this.service.addData(CommonStubs.eatItems(ItemType.EAT_NOW));
 		this.service.addData(CommonStubs.eatItems(ItemType.EAT_LATER));

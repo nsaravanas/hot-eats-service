@@ -27,19 +27,19 @@ public class OrderControllerImpl implements OrderController {
 	}
 
 	@Override
-	@RequestMapping(value = "/order", method = RequestMethod.POST)
+	@RequestMapping(value = "/order/add", method = RequestMethod.POST)
 	public Orders addOrder(@RequestBody Orders order) {
 		return this.service.addOrder(order);
 	}
 
 	@Override
-	@RequestMapping(value = "/order", method = RequestMethod.PUT)
+	@RequestMapping(value = "/order/update", method = RequestMethod.PUT)
 	public Orders updateOrder(@RequestBody Orders order) {
 		return this.service.updateOrder(order);
 	}
 
 	@Override
-	@RequestMapping(value = "/order", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/order/delete", method = RequestMethod.DELETE)
 	public void deleteOrder(@RequestBody Orders order) {
 		this.service.deleteOrder(order);
 	}
@@ -61,8 +61,8 @@ public class OrderControllerImpl implements OrderController {
 		return this.service.addOrder(CommonStubs.testOrder());
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/sample", method = RequestMethod.GET)
 	public Orders testAddOrder() {
-		return this.service.saveOrder(CommonStubs.testOrder());
+		return CommonStubs.testOrder();
 	}
 }

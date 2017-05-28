@@ -18,6 +18,7 @@ import com.hoteats.commons.CommonStubs;
 import com.hoteats.models.LoginResponse;
 import com.hoteats.models.User;
 import com.hoteats.models.UserAddress;
+import com.hoteats.models.enums.UserStatus;
 import com.hoteats.service.UserService;
 
 @RestController
@@ -46,18 +47,21 @@ public class UserControllerImpl implements UserController {
 	@Override
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<?> addUser(@RequestBody User user) {
-		if (findByUsername(user.getUsername()) == null) {
+		User u = this.service.findByUsername(user.getUsername());
+		if (u == null) {
 			return new ResponseEntity<User>(this.service.addUser(user), HttpStatus.CREATED);
 		}
 		Map<String, Object> response = new HashMap<>();
-		response.put("error", "username already exist");
+		response.put("message", "username already exist");
+		response.put("status", UserStatus.EXISTS);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 	}
 
 	@Override
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public User findByUsername(@RequestParam String username) {
-		return this.service.findByUsername(username);
+	public ResponseEntity<UserStatus> findByUsername(@RequestParam String username) {
+		User u = this.service.findByUsername(username);
+		return new ResponseEntity<>(u == null ? UserStatus.NOT_EXISTS : UserStatus.EXISTS, HttpStatus.OK);
 	}
 
 	@Override

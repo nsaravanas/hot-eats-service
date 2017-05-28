@@ -34,7 +34,7 @@ public class EatItem {
 	@Column
 	private BigDecimal price;
 
-	@JsonManagedReference
+//	@JsonManagedReference
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "itemOfferId", nullable = true)
 	private ItemOffer offer;

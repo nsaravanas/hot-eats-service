@@ -27,7 +27,7 @@ public class User {
 	private String password;
 
 	@JsonManagedReference
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER, mappedBy = "user")
 	private UserInfo userInfo;
 
 	public Long getUserId() {

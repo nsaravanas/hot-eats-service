@@ -22,12 +22,12 @@ public class OrderItem {
 	@JoinColumn(name = "orderId", nullable = false)
 	private Orders orders;
 
-	@JsonManagedReference
+//	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "itemId", nullable = true)
 	private Item item;
 
-	@JsonManagedReference
+//	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "eatItemId", nullable = true)
 	private EatItem eatItemId;

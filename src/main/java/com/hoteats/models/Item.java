@@ -43,7 +43,7 @@ public class Item {
 	@JoinColumn(name = "menuId", nullable = false)
 	private Menu menu;
 
-	@JsonManagedReference
+//	@JsonManagedReference
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "itemOfferId", nullable = true)
 	private ItemOffer offer;
