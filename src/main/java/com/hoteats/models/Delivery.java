@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -29,7 +28,7 @@ public class Delivery {
 	private Long contactNo;
 
 	@JsonManagedReference
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "trackId")
 	private Track track;
 
@@ -42,13 +41,13 @@ public class Delivery {
 	@Column
 	private LocalDate registrationDate;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "userAddressId")
 	private UserAddress address;
 
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "orderId", nullable = false)
+	@JoinColumn(name = "orderId")
 	private Orders orders;
 
 	public Track getTrack() {

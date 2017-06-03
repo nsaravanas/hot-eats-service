@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class OrderItem {
@@ -22,12 +21,10 @@ public class OrderItem {
 	@JoinColumn(name = "orderId", nullable = false)
 	private Orders orders;
 
-//	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "itemId", nullable = true)
 	private Item item;
 
-//	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "eatItemId", nullable = true)
 	private EatItem eatItemId;

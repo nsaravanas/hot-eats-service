@@ -32,7 +32,7 @@ public class Orders {
 	private User user;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems;
 
 	@Column
@@ -42,8 +42,11 @@ public class Orders {
 	private LocalDateTime updatedOn;
 
 	@Column
+	private String updatedBy;
+
+	@Column
 	@Enumerated(EnumType.STRING)
-	private Status status;
+	private Status status = Status.PLACED;
 
 	@Column
 	private LocalDateTime deliveryTime;
@@ -127,4 +130,11 @@ public class Orders {
 		this.status = status;
 	}
 
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
 }

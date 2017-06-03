@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hoteats.commons.CommonStubs;
 import com.hoteats.models.Orders;
+import com.hoteats.models.enums.Status;
 import com.hoteats.service.OrderService;
 
 @RestController
@@ -65,4 +66,13 @@ public class OrderControllerImpl implements OrderController {
 	public Orders testAddOrder() {
 		return CommonStubs.testOrder();
 	}
+
+	public List<Orders> getEatOrders() {
+		return this.service.getAllUnprocessedEatOrders();
+	}
+
+	public Orders updateOrderStatus(Long orderId, Status status, String updatedBy) {
+		return this.service.updateOrderStatus(orderId, status, updatedBy);
+	}
+
 }

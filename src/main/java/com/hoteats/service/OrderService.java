@@ -3,6 +3,7 @@ package com.hoteats.service;
 import java.util.List;
 
 import com.hoteats.models.Orders;
+import com.hoteats.models.enums.Status;
 
 public interface OrderService {
 
@@ -19,5 +20,9 @@ public interface OrderService {
 	void deleteOrder(Long orderId);
 
 	List<Orders> ordersByUserId(Long userId);
+
+	Orders updateOrderStatus(Long orderId, Status status, String updatedBy);
+
+	List<Orders> getAllUnprocessedEatOrders();
 
 }

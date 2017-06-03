@@ -25,7 +25,7 @@ public class Track {
 
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "deliveryId", nullable = false)
+//	@JoinColumn(name = "deliveryId")
 	private Delivery delivery;
 
 	public Delivery getDelivery() {
