@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -21,6 +22,7 @@ import com.hoteats.models.enums.UserStatus;
 public class UserInfo {
 
 	@Id
+	@GeneratedValue
 	private Long userInfoId;
 
 	@JoinColumn(name = "userId", nullable = false)
@@ -43,8 +45,7 @@ public class UserInfo {
 	@Column
 	private LocalDateTime userSince;
 
-	// @JsonManagedReference
-	@OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userInfo", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	private List<UserAddress> userAddress;
 
 	@Column
