@@ -1,6 +1,8 @@
 package com.hoteats.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 
@@ -35,9 +37,10 @@ public class EatNowLaterControllerImpl implements EatNowLaterController {
 
 	@RequestMapping(value = "/load", method = RequestMethod.GET)
 	@PostConstruct
-	public void loadSampleData() {
-		this.service.addData(CommonStubs.eatItems(ItemType.EAT_NOW));
-		this.service.addData(CommonStubs.eatItems(ItemType.EAT_LATER));
+	public List<EatItem> loadSampleData() {
+		List<EatItem> now = this.service.addData(CommonStubs.eatItems(ItemType.EAT_NOW));
+		List<EatItem> later = this.service.addData(CommonStubs.eatItems(ItemType.EAT_LATER));
+		return Stream.of(now, later).flatMap(List::stream).collect(Collectors.toList());
 	}
 
 }
