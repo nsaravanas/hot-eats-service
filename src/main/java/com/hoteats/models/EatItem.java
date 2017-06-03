@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hoteats.models.enums.ItemType;
 import com.hoteats.models.enums.Status;
 
@@ -34,7 +33,6 @@ public class EatItem {
 	@Column
 	private BigDecimal price;
 
-//	@JsonManagedReference
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "itemOfferId", nullable = true)
 	private ItemOffer offer;

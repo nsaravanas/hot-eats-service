@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hoteats.models.enums.ItemType;
 import com.hoteats.models.enums.Status;
 
@@ -43,7 +42,6 @@ public class Item {
 	@JoinColumn(name = "menuId", nullable = false)
 	private Menu menu;
 
-//	@JsonManagedReference
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "itemOfferId", nullable = true)
 	private ItemOffer offer;

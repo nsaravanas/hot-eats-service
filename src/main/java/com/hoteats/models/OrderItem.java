@@ -27,7 +27,7 @@ public class OrderItem {
 
 	@ManyToOne
 	@JoinColumn(name = "eatItemId", nullable = true)
-	private EatItem eatItemId;
+	private EatItem eatItem;
 
 	@Column
 	private Integer quantity;
@@ -75,11 +75,4 @@ public class OrderItem {
 		this.price = price;
 	}
 
-	public EatItem getEatItemId() {
-		return eatItemId;
-	}
-
-	public void setEatItemId(EatItem eatItemId) {
-		this.eatItemId = eatItemId;
-	}
 }

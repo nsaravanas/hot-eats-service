@@ -19,7 +19,7 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
 	@Query("update Orders set status = ?2, updatedBy = ?3 , updatedOn = ?4 where orderId = ?1")
 	Orders updateOrderStatus(Long orderId, Status status, String updatedBy, LocalDateTime updatedOn);
 
-	@Query("from Orders as o where o.status = 'PLACED' and o.orderItems.eatItemId is null")
+	@Query(nativeQuery = true, value = "SELECT O FROM ORDERS O INNER JOIN ORDER_ITEM OI ON OI.ORDER_ID = O.ORDER_ID WHERE O.STATUS = 'PLACED' AND OI.EAT_ITEM_ID IS NOT NULL")
 	List<Orders> getAllUnprocessedEatOrders();
 
 }
