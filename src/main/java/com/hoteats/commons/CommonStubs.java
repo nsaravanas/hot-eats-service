@@ -95,7 +95,7 @@ public class CommonStubs {
 		co.setLatitude(1.123);
 		co.setLongitude(2.234);
 		l1.setCoordinate(co);
-		ra1.setLocation(l1);
+//		ra1.setLocation(l1);
 		branches.add(ra1);
 		r.setBranches(branches);
 		Menu m2 = new Menu();
@@ -231,7 +231,7 @@ public class CommonStubs {
 		co.setLatitude(1.123);
 		co.setLongitude(2.234);
 		l1.setCoordinate(co);
-		ua2.setLocation(l1);
+//		ua2.setLocation(l1);
 		addresses.add(ua1);
 		addresses.add(ua2);
 		userInfo.setUserAddress(addresses);

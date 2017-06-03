@@ -41,25 +41,25 @@ public abstract class Address {
 	@Column
 	private String addressName;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "locationId", nullable = true)
-	private Location location;
+//	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+//	@JoinColumn(name = "locationId", nullable = true)
+//	private Location location;
 
 	public Long getAddressId() {
 		return addressId;
 	}
 
-	public Location getLocation() {
-		return location;
-	}
+//	public Location getLocation() {
+//		return location;
+//	}
 
 	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
-	}
+//	public void setLocation(Location location) {
+//		this.location = location;
+//	}
 
 	public String getDoorNo() {
 		return doorNo;
