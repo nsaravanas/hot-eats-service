@@ -27,7 +27,7 @@ public class Orders {
 	@GeneratedValue
 	private Long orderId;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 

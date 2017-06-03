@@ -1,14 +1,21 @@
 package com.hoteats.controller;
 
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hoteats.commons.CommonStubs;
 import com.hoteats.models.Orders;
 import com.hoteats.models.enums.Status;
@@ -16,6 +23,7 @@ import com.hoteats.service.OrderService;
 
 @RestController
 @RequestMapping("/orders")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class OrderControllerImpl implements OrderController {
 
 	@Autowired
@@ -67,12 +75,27 @@ public class OrderControllerImpl implements OrderController {
 		return CommonStubs.testOrder();
 	}
 
+	@Override
+	@RequestMapping(value = "/eats/unprocessed", method = RequestMethod.GET)
 	public List<Orders> getEatOrders() {
 		return this.service.getAllUnprocessedEatOrders();
 	}
 
-	public Orders updateOrderStatus(Long orderId, Status status, String updatedBy) {
-		return this.service.updateOrderStatus(orderId, status, updatedBy);
+	@Override
+	@RequestMapping(value = "/order/{orderId}", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateOrderStatus(@PathVariable Long orderId, @RequestParam Status status,
+			@RequestParam String updatedBy) {
+		Map<String, Object> map = new LinkedHashMap<>();
+		Orders o = this.service.getOrderById(orderId);
+		if (o == null) {
+			map.put("error", "orderId " + orderId + " not found.");
+			return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+		}
+		o.setStatus(status);
+		o.setUpdatedBy(updatedBy);
+		o.setUpdatedOn(LocalDateTime.now());
+		Orders ro = this.service.updateOrder(o);
+		return new ResponseEntity<>(ro, HttpStatus.OK);
 	}
 
 }

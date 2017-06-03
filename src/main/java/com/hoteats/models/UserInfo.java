@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hoteats.models.enums.UserStatus;
 
 @Entity
@@ -45,6 +46,7 @@ public class UserInfo {
 	@Column
 	private LocalDateTime userSince;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "userInfo", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	private List<UserAddress> userAddress;
 

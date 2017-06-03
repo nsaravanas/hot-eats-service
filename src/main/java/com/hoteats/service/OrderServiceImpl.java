@@ -61,11 +61,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Orders updateOrderStatus(Long orderId, Status status, String updatedBy) {
+	@Transactional
+	public Integer updateOrderStatus(Long orderId, Status status, String updatedBy) {
 		return this.repository.updateOrderStatus(orderId, status, updatedBy, LocalDateTime.now());
 	}
 
 	@Override
+	@Transactional
 	public List<Orders> getAllUnprocessedEatOrders() {
 		return this.repository.getAllUnprocessedEatOrders();
 	}

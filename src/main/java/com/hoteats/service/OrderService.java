@@ -21,7 +21,7 @@ public interface OrderService {
 
 	List<Orders> ordersByUserId(Long userId);
 
-	Orders updateOrderStatus(Long orderId, Status status, String updatedBy);
+	Integer updateOrderStatus(Long orderId, Status status, String updatedBy);
 
 	List<Orders> getAllUnprocessedEatOrders();
 

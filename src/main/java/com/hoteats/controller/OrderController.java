@@ -2,7 +2,10 @@ package com.hoteats.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.hoteats.models.Orders;
+import com.hoteats.models.enums.Status;
 
 public interface OrderController {
 
@@ -17,5 +20,9 @@ public interface OrderController {
 	void deleteOrder(Long orderId);
 
 	List<Orders> ordersByUserId(Long userId);
+
+	List<Orders> getEatOrders();
+
+	ResponseEntity<?> updateOrderStatus(Long orderId, Status status, String updatedBy);
 
 }

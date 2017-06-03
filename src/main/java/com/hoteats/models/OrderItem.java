@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,7 +15,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class OrderItem {
 
 	@Id
-	private Long id;
+	@GeneratedValue
+	private Long orderItemId;
 
 	@JsonBackReference
 	@ManyToOne
@@ -34,14 +36,6 @@ public class OrderItem {
 
 	@Column
 	private BigDecimal price;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Orders getOrders() {
 		return orders;
@@ -73,6 +67,22 @@ public class OrderItem {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public EatItem getEatItem() {
+		return eatItem;
+	}
+
+	public Long getOrderItemId() {
+		return orderItemId;
+	}
+
+	public void setEatItem(EatItem eatItem) {
+		this.eatItem = eatItem;
+	}
+
+	public void setOrderItemId(Long orderItemId) {
+		this.orderItemId = orderItemId;
 	}
 
 }

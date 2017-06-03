@@ -71,7 +71,7 @@ public class CommonStubs {
 		tags.add("Hot deal");
 		tags.add("Fast selling");
 		tags.add("Breakfast");
-		i1.setTags(tags);
+		// i1.setTags(tags);
 		i1.setMenu(m1);
 		items.add(i1);
 		m1.setItems(items);
@@ -95,7 +95,7 @@ public class CommonStubs {
 		co.setLatitude(1.123);
 		co.setLongitude(2.234);
 		l1.setCoordinate(co);
-//		ra1.setLocation(l1);
+		// ra1.setLocation(l1);
 		branches.add(ra1);
 		r.setBranches(branches);
 		Menu m2 = new Menu();
@@ -162,7 +162,7 @@ public class CommonStubs {
 		Item i1 = new Item();
 		i1.setItemId((long) id);
 		i1.setName(name);
-		i1.setTags(randomTags(tags));
+		// i1.setTags(randomTags(tags));
 		i1.setDescription(i1.getName());
 		i1.setType(name.contains("+") ? ItemType.COMBO : ItemType.NORMAL);
 		i1.setPrice(new BigDecimal(Double.parseDouble(price)));
@@ -231,7 +231,7 @@ public class CommonStubs {
 		co.setLatitude(1.123);
 		co.setLongitude(2.234);
 		l1.setCoordinate(co);
-//		ua2.setLocation(l1);
+		// ua2.setLocation(l1);
 		addresses.add(ua1);
 		addresses.add(ua2);
 		userInfo.setUserAddress(addresses);
@@ -280,7 +280,7 @@ public class CommonStubs {
 		order.setOrderPrice(price);
 		List<OrderItem> items = new ArrayList<>();
 		OrderItem oi1 = new OrderItem();
-		oi1.setId(12L);
+		oi1.setOrderItemId(12L);
 		oi1.setOrders(order);
 		oi1.setItem(testRestaurant().getMenu().get(0).getItems().get(0));
 		oi1.setPrice(BigDecimal.TEN);
