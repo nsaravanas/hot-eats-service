@@ -12,7 +12,7 @@ public class UserAddress extends Address {
 
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "userInfoId", nullable = false)
+	@JoinColumn(name = "userInfoId")
 	private UserInfo userInfo;
 
 	@Column
