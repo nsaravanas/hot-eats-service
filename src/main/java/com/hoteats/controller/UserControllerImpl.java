@@ -54,6 +54,7 @@ public class UserControllerImpl implements UserController {
 		Map<String, Object> response = new HashMap<>();
 		response.put("message", "username already exist");
 		response.put("status", UserStatus.EXISTS);
+		response.put("id", u.getUserId());
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 	}
 
