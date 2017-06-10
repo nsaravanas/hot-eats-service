@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hoteats.commons.CommonStubs;
 import com.hoteats.models.Orders;
 import com.hoteats.models.enums.Status;
@@ -23,7 +22,6 @@ import com.hoteats.service.OrderService;
 
 @RestController
 @RequestMapping("/orders")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class OrderControllerImpl implements OrderController {
 
 	@Autowired
@@ -38,12 +36,14 @@ public class OrderControllerImpl implements OrderController {
 	@Override
 	@RequestMapping(value = "/order/add", method = RequestMethod.POST)
 	public Orders addOrder(@RequestBody Orders order) {
+		order.setOrderedOn(LocalDateTime.now());
 		return this.service.addOrder(order);
 	}
 
 	@Override
 	@RequestMapping(value = "/order/update", method = RequestMethod.PUT)
 	public Orders updateOrder(@RequestBody Orders order) {
+		order.setUpdatedOn(LocalDateTime.now());
 		return this.service.updateOrder(order);
 	}
 
@@ -76,6 +76,12 @@ public class OrderControllerImpl implements OrderController {
 	}
 
 	@Override
+	@RequestMapping(value = "/order/unprocessed", method = RequestMethod.GET)
+	public List<Orders> getUnprocessedOrders() {
+		return this.service.getOrderByStatus(Status.PLACED);
+	}
+
+	@Override
 	@RequestMapping(value = "/eats/unprocessed", method = RequestMethod.GET)
 	public List<Orders> getEatOrders() {
 		return this.service.getAllUnprocessedEatOrders();
@@ -93,8 +99,7 @@ public class OrderControllerImpl implements OrderController {
 		}
 		o.setStatus(status);
 		o.setUpdatedBy(updatedBy);
-		o.setUpdatedOn(LocalDateTime.now());
-		Orders ro = this.service.updateOrder(o);
+		Orders ro = this.updateOrder(o);
 		return new ResponseEntity<>(ro, HttpStatus.OK);
 	}
 

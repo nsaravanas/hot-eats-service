@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -157,8 +156,8 @@ public class CommonStubs {
 	}
 
 	public static Item item(int id, String name, String price) {
-		List<String> tags = new ArrayList<>(
-				Arrays.asList("hot", "best", "fast", "breakfast", "combo", "lunch", "dinner"));
+		// List<String> tags = new ArrayList<>(Arrays.asList("hot", "best",
+		// "fast", "breakfast", "combo", "lunch", "dinner"));
 		Item i1 = new Item();
 		i1.setItemId((long) id);
 		i1.setName(name);
@@ -172,10 +171,11 @@ public class CommonStubs {
 		return i1;
 	}
 
-	private static Set<String> randomTags(List<String> tags) {
-		Collections.shuffle(tags);
-		return new HashSet<>(tags.subList(0, ThreadLocalRandom.current().nextInt(tags.size() / 2, tags.size())));
-	}
+	// private static Set<String> randomTags(List<String> tags) {
+	// Collections.shuffle(tags);
+	// return new HashSet<>(tags.subList(0,
+	// ThreadLocalRandom.current().nextInt(tags.size() / 2, tags.size())));
+	// }
 
 	private static ItemOffer randomOffers(int id, double price) {
 		LocalDateTime start = LocalDateTime.of(2017, 1, 1, 0, 0);
@@ -242,7 +242,6 @@ public class CommonStubs {
 
 	public static Orders testOrder() {
 		Orders order = new Orders();
-		order.setDeliveryTime(LocalDateTime.now());
 		order.setOrderedOn(LocalDateTime.now());
 		order.setOrderId(10L);
 		order.setStatus(Status.PROCESSING);
@@ -251,13 +250,12 @@ public class CommonStubs {
 		Delivery delivery = new Delivery();
 		delivery.setDeliveryId(10L);
 		delivery.setAddress(testUser().getUserInfo().getUserAddress().get(0));
-		delivery.setBikeNo("TN14 X1234");
-		delivery.setBoxId("123");
-		delivery.setContactNo(9513572580L);
-		delivery.setDeliveryName("Delivery name");
-		delivery.setOrders(order);
-		delivery.setRegistrationDate(LocalDate.now());
 		Track track = new Track();
+		track.setBikeNo("TN14 X1234");
+		track.setBoxId("123");
+		delivery.setMobile(9513572580L);
+		delivery.setOrders(order);
+		track.setRegistrationDate(LocalDate.now());
 		track.setTrackId(1l);
 		List<TimeCoorinate> coorinates = new ArrayList<>();
 		TimeCoorinate tc1 = new TimeCoorinate();
@@ -270,8 +268,6 @@ public class CommonStubs {
 		tc1.setCoordinate(co);
 		coorinates.add(tc1);
 		track.setTimeCoorinates(coorinates);
-		delivery.setTrack(track);
-		track.setDelivery(delivery);
 		order.setDelivery(delivery);
 		OrderPrice price = new OrderPrice();
 		price.setAmountPaid(120.50);

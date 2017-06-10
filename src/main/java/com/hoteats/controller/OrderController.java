@@ -25,4 +25,6 @@ public interface OrderController {
 
 	ResponseEntity<?> updateOrderStatus(Long orderId, Status status, String updatedBy);
 
+	List<Orders> getUnprocessedOrders();
+
 }

@@ -1,6 +1,6 @@
 package com.hoteats.models;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,10 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Delivery {
@@ -22,24 +20,10 @@ public class Delivery {
 	private Long deliveryId;
 
 	@Column
-	private String deliveryName;
+	private Long mobile;
 
 	@Column
-	private Long contactNo;
-
-	@JsonManagedReference
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "trackId")
-	private Track track;
-
-	@Column
-	private String bikeNo;
-
-	@Column
-	private String boxId;
-
-	@Column
-	private LocalDate registrationDate;
+	private LocalDateTime deliveryTime;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "userAddressId")
@@ -50,12 +34,12 @@ public class Delivery {
 	@JoinColumn(name = "orderId")
 	private Orders orders;
 
-	public Track getTrack() {
-		return track;
+	public LocalDateTime getDeliveryTime() {
+		return deliveryTime;
 	}
 
-	public void setTrack(Track track) {
-		this.track = track;
+	public void setDeliveryTime(LocalDateTime deliveryTime) {
+		this.deliveryTime = deliveryTime;
 	}
 
 	public Long getDeliveryId() {
@@ -64,46 +48,6 @@ public class Delivery {
 
 	public void setDeliveryId(Long deliveryId) {
 		this.deliveryId = deliveryId;
-	}
-
-	public String getDeliveryName() {
-		return deliveryName;
-	}
-
-	public void setDeliveryName(String deliveryName) {
-		this.deliveryName = deliveryName;
-	}
-
-	public Long getContactNo() {
-		return contactNo;
-	}
-
-	public void setContactNo(Long contactNo) {
-		this.contactNo = contactNo;
-	}
-
-	public String getBikeNo() {
-		return bikeNo;
-	}
-
-	public void setBikeNo(String bikeNo) {
-		this.bikeNo = bikeNo;
-	}
-
-	public String getBoxId() {
-		return boxId;
-	}
-
-	public void setBoxId(String boxId) {
-		this.boxId = boxId;
-	}
-
-	public LocalDate getRegistrationDate() {
-		return registrationDate;
-	}
-
-	public void setRegistrationDate(LocalDate registrationDate) {
-		this.registrationDate = registrationDate;
 	}
 
 	public UserAddress getAddress() {
@@ -120,6 +64,14 @@ public class Delivery {
 
 	public void setOrders(Orders orders) {
 		this.orders = orders;
+	}
+
+	public Long getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(Long mobile) {
+		this.mobile = mobile;
 	}
 
 }

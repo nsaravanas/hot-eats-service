@@ -25,4 +25,6 @@ public interface OrderService {
 
 	List<Orders> getAllUnprocessedEatOrders();
 
+	List<Orders> getOrderByStatus(Status status);
+
 }

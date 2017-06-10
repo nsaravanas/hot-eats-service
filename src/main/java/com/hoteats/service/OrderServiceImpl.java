@@ -13,63 +13,60 @@ import com.hoteats.models.enums.Status;
 import com.hoteats.repository.OrderRepository;
 
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderRepository repository;
 
 	@Override
-	@Transactional
 	public Orders getOrderById(Long orderId) {
 		return this.repository.findOne(orderId);
 	}
 
 	@Override
-	@Transactional
 	public Orders saveOrder(Orders order) {
 		return this.repository.save(order);
 	}
 
 	@Override
-	@Transactional
 	public Orders addOrder(Orders order) {
 		return this.repository.save(order);
 	}
 
 	@Override
-	@Transactional
 	public Orders updateOrder(Orders order) {
 		return this.repository.save(order);
 	}
 
 	@Override
-	@Transactional
 	public void deleteOrder(Orders order) {
 		this.repository.delete(order);
 	}
 
 	@Override
-	@Transactional
 	public void deleteOrder(Long orderId) {
 		this.repository.delete(orderId);
 	}
 
 	@Override
-	@Transactional
 	public List<Orders> ordersByUserId(Long userId) {
 		return this.repository.ordersByUserId(userId);
 	}
 
 	@Override
-	@Transactional
 	public Integer updateOrderStatus(Long orderId, Status status, String updatedBy) {
 		return this.repository.updateOrderStatus(orderId, status, updatedBy, LocalDateTime.now());
 	}
 
 	@Override
-	@Transactional
 	public List<Orders> getAllUnprocessedEatOrders() {
 		return this.repository.getAllUnprocessedEatOrders();
+	}
+
+	@Override
+	public List<Orders> getOrderByStatus(Status status) {
+		return this.repository.getOrdersByStatus(status);
 	}
 
 }

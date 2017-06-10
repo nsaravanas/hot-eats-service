@@ -32,7 +32,7 @@ public class Orders {
 	private User user;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<OrderItem> orderItems;
 
 	@Column
@@ -47,9 +47,6 @@ public class Orders {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private Status status = Status.PLACED;
-
-	@Column
-	private LocalDateTime deliveryTime;
 
 	@Embedded
 	private OrderPrice orderPrice;
@@ -72,14 +69,6 @@ public class Orders {
 
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
-	}
-
-	public LocalDateTime getDeliveryTime() {
-		return deliveryTime;
-	}
-
-	public void setDeliveryTime(LocalDateTime deliveryTime) {
-		this.deliveryTime = deliveryTime;
 	}
 
 	public OrderPrice getOrderPrice() {

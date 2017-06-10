@@ -14,14 +14,20 @@ import com.hoteats.models.enums.Status;
 @Repository
 public interface OrderRepository extends JpaRepository<Orders, Long> {
 
-	@Query("from Orders where userId = ?1")
+	@Query("FROM Orders WHERE userId = ?1 ORDER BY orderedOn DESC")
 	List<Orders> ordersByUserId(Long userId);
 
+	@Query("FROM Orders WHERE userId = ?1 and status = ?2 ORDER BY orderedOn DESC")
+	List<Orders> ordersByUserIdAndStatus(Long userId, Status status);
+
+	@Query("FROM Orders WHERE status = ?1 ORDER BY orderedOn DESC")
+	List<Orders> getOrdersByStatus(Status status);
+
 	@Modifying
-	@Query("update Orders set status = ?2, updatedBy = ?3 , updatedOn = ?4 where orderId = ?1")
+	@Query("UPDATE Orders SET status = ?2, updatedBy = ?3 , updatedOn = ?4 where orderId = ?1")
 	Integer updateOrderStatus(Long orderId, Status status, String updatedBy, LocalDateTime updatedOn);
 
-	@Query(nativeQuery = true, value = "SELECT O FROM ORDERS O INNER JOIN ORDER_ITEM OI ON OI.ORDER_ID = O.ORDER_ID WHERE O.STATUS = 'PLACED' AND OI.EAT_ITEM_ID IS NOT NULL")
+	@Query("SELECT o FROM Orders o JOIN	o.orderItems oi WHERE status = 'PLACED'")
 	List<Orders> getAllUnprocessedEatOrders();
 
 }
