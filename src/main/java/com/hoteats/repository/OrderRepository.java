@@ -14,10 +14,10 @@ import com.hoteats.models.enums.Status;
 @Repository
 public interface OrderRepository extends JpaRepository<Orders, Long> {
 
-	@Query("FROM Orders WHERE userId = ?1 ORDER BY orderedOn DESC")
+	@Query("FROM Orders o WHERE o.user.userId = ?1 ORDER BY orderedOn DESC")
 	List<Orders> ordersByUserId(Long userId);
 
-	@Query("FROM Orders WHERE userId = ?1 and status = ?2 ORDER BY orderedOn DESC")
+	@Query("FROM Orders o WHERE o.user.userId = ?1 and status = ?2 ORDER BY orderedOn DESC")
 	List<Orders> ordersByUserIdAndStatus(Long userId, Status status);
 
 	@Query("FROM Orders WHERE status = ?1 ORDER BY orderedOn DESC")
