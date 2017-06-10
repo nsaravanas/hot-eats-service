@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,6 +19,7 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hoteats.models.enums.UserStatus;
+import com.hoteats.models.enums.UserType;
 
 @Entity
 public class UserInfo {
@@ -53,6 +55,17 @@ public class UserInfo {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private UserStatus status;
+
+	@ElementCollection
+	private List<UserType> userTypes;
+
+	public List<UserType> getUserTypes() {
+		return userTypes;
+	}
+
+	public void setUserTypes(List<UserType> userTypes) {
+		this.userTypes = userTypes;
+	}
 
 	public UserStatus getStatus() {
 		return status;
