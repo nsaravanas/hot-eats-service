@@ -52,7 +52,7 @@ public class Orders {
 	private OrderPrice orderPrice;
 
 	@JsonManagedReference
-	@OneToOne(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "orders", cascade = CascadeType.ALL)
 	private Delivery delivery;
 
 	public Delivery getDelivery() {
