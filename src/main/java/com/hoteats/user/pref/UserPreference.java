@@ -1,4 +1,4 @@
-package com.hoteats.models.pref;
+package com.hoteats.user.pref;
 
 import java.util.List;
 
