@@ -1,7 +1,7 @@
 package com.hoteats.models;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,7 +32,7 @@ public class Track {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "track", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<TimeCoorinate> timeCoorinates;
+	private Set<TimeCoorinate> timeCoorinates;
 
 	@ManyToOne
 	private Orders order;
@@ -53,11 +53,11 @@ public class Track {
 		this.trackId = trackId;
 	}
 
-	public List<TimeCoorinate> getTimeCoorinates() {
+	public Set<TimeCoorinate> getTimeCoorinates() {
 		return timeCoorinates;
 	}
 
-	public void setTimeCoorinates(List<TimeCoorinate> timeCoorinates) {
+	public void setTimeCoorinates(Set<TimeCoorinate> timeCoorinates) {
 		this.timeCoorinates = timeCoorinates;
 	}
 

@@ -1,7 +1,7 @@
 package com.hoteats.models;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -50,20 +50,20 @@ public class UserInfo {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "userInfo", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
-	private List<UserAddress> userAddress;
+	private Set<UserAddress> userAddress;
 
 	@Column
 	@Enumerated(EnumType.STRING)
 	private UserStatus status;
 
 	@ElementCollection
-	private List<UserType> userTypes;
+	private Set<UserType> userTypes;
 
-	public List<UserType> getUserTypes() {
+	public Set<UserType> getUserTypes() {
 		return userTypes;
 	}
 
-	public void setUserTypes(List<UserType> userTypes) {
+	public void setUserTypes(Set<UserType> userTypes) {
 		this.userTypes = userTypes;
 	}
 
@@ -99,11 +99,11 @@ public class UserInfo {
 		this.userSince = userSince;
 	}
 
-	public List<UserAddress> getUserAddress() {
+	public Set<UserAddress> getUserAddress() {
 		return userAddress;
 	}
 
-	public void setUserAddress(List<UserAddress> userAddress) {
+	public void setUserAddress(Set<UserAddress> userAddress) {
 		this.userAddress = userAddress;
 	}
 

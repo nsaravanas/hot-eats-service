@@ -14,20 +14,22 @@ import com.hoteats.models.enums.Status;
 @Repository
 public interface OrderRepository extends JpaRepository<Orders, Long> {
 
-	@Query("FROM Orders o WHERE o.user.userId = ?1 ORDER BY orderedOn DESC")
+	@Query("SELECT DISTINCT o FROM Orders o WHERE o.user.userId = ?1 ORDER BY o.orderedOn DESC")
 	List<Orders> ordersByUserId(Long userId);
 
-	@Query("FROM Orders o WHERE o.user.userId = ?1 and status = ?2 ORDER BY orderedOn DESC")
+	@Query("SELECT DISTINCT o FROM Orders o WHERE o.user.userId = ?1 and o.status = ?2 ORDER BY o.orderedOn DESC")
 	List<Orders> ordersByUserIdAndStatus(Long userId, Status status);
 
-	@Query("FROM Orders WHERE status = ?1 ORDER BY orderedOn DESC")
+	@Query("SELECT DISTINCT o FROM Orders o WHERE o.status = ?1 ORDER BY o.orderedOn DESC")
 	List<Orders> getOrdersByStatus(Status status);
 
 	@Modifying
-	@Query("UPDATE Orders SET status = ?2, updatedBy = ?3 , updatedOn = ?4 where orderId = ?1")
+	@Query("UPDATE Orders o SET o.status = ?2, o.updatedBy = ?3 , o.updatedOn = ?4 where o.orderId = ?1")
 	Integer updateOrderStatus(Long orderId, Status status, String updatedBy, LocalDateTime updatedOn);
 
-	@Query("SELECT o FROM Orders o JOIN	o.orderItems oi WHERE status = 'PLACED'")
+	@Query("SELECT DISTINCT o FROM Orders o JOIN o.orderItems oi WHERE o.status = 'PLACED'")
 	List<Orders> getAllUnprocessedEatOrders();
 
+	@Query("SELECT DISTINCT o FROM Orders o WHERE o.orderId = ?1")
+	List<Orders> findOneByOrderId(Long orderId);
 }

@@ -3,9 +3,9 @@ package com.hoteats.commons;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -48,11 +48,11 @@ public class CommonStubs {
 		Restaurant r = new Restaurant();
 		r.setName("Test Restaurant");
 		r.setRestaurantId(100L);
-		List<Menu> menu = new ArrayList<>();
+		Set<Menu> menu = new LinkedHashSet<>();
 		Menu m1 = new Menu();
 		m1.setMenuId(1L);
 		m1.setRestaurant(r);
-		List<Item> items = new ArrayList<>();
+		Set<Item> items = new HashSet<>();
 		Item i1 = new Item();
 		i1.setItemId(100L);
 		i1.setName("BF-1");
@@ -74,7 +74,7 @@ public class CommonStubs {
 		i1.setMenu(m1);
 		items.add(i1);
 		m1.setItems(items);
-		List<RestaurantAddress> branches = new ArrayList<>();
+		Set<RestaurantAddress> branches = new HashSet<>();
 		RestaurantAddress ra1 = new RestaurantAddress();
 		ra1.setAddressId(0L);
 		ra1.setRestaurant(r);
@@ -100,7 +100,7 @@ public class CommonStubs {
 		Menu m2 = new Menu();
 		m2.setMenuId(2L);
 		m2.setRestaurant(r);
-		List<Item> it = items();
+		Set<Item> it = items();
 		it.stream().forEach(i -> i.setMenu(m2));
 		m2.setItems(it);
 		m2.setRestaurant(r);
@@ -108,10 +108,8 @@ public class CommonStubs {
 		m3.setRestaurant(r);
 		m3.setMenuId(3L);
 		m3.setName("Eat Now");
-		List<Item> ite = items().stream().peek(i -> i.setItemId(i.getItemId() + 150)).peek(i -> i.setMenu(m3))
-				/*
-				 * .peek(i -> i.getOffer().setItemOfferId(i.getItemId() + 150))
-				 */.collect(Collectors.toList());
+		Set<Item> ite = items().stream().peek(i -> i.setItemId(i.getItemId() + 150)).peek(i -> i.setMenu(m3))
+				.collect(Collectors.toSet());
 		m3.setItems(ite);
 		menu.add(m1);
 		menu.add(m2);
@@ -136,7 +134,7 @@ public class CommonStubs {
 		return eatItem;
 	}
 
-	public static List<Item> items() {
+	public static Set<Item> items() {
 
 		String itemsStr = "Idly 4::30 \n" + "Dosa 3::36 \n" + "Chappathi 3::36 \n" + "Puttu 3::36 \n"
 				+ "Idiyappam 5::30 \n" + "Pongal 1::36 \n" + "Vada 1::9 \n" + "Boiled Egg 1::10 \n" + "Omlet 1::12 \n"
@@ -147,7 +145,7 @@ public class CommonStubs {
 				+ "Pongal + Vada Combo(1+1) 1+1::44 \n" + "Chappathi + Egg(3+1) 3+1::45 \n"
 				+ "Chappathi+Omlet(3+1) 3+1::46 \n";
 		String[] lines = itemsStr.split("\n");
-		List<Item> items = new ArrayList<>();
+		Set<Item> items = new LinkedHashSet<>();
 		for (int i = 0; i < lines.length; i++) {
 			String[] arr = lines[i].split("::");
 			items.add(item(i, arr[0].trim(), arr[1].trim()));
@@ -199,7 +197,7 @@ public class CommonStubs {
 		user.setUserId(1L);
 		user.setUsername("tester");
 		userInfo.setUserSince(LocalDateTime.of(2017, 4, 1, 0, 0));
-		List<UserAddress> addresses = new ArrayList<UserAddress>();
+		Set<UserAddress> addresses = new HashSet<UserAddress>();
 		UserAddress ua1 = new UserAddress();
 		ua1.setAddressId(1L);
 		ua1.setUserInfo(userInfo);
@@ -249,7 +247,7 @@ public class CommonStubs {
 		order.setUser(testUser());
 		Delivery delivery = new Delivery();
 		delivery.setDeliveryId(10L);
-		delivery.setAddress(testUser().getUserInfo().getUserAddress().get(0));
+		delivery.setAddress(testUser().getUserInfo().getUserAddress().stream().findAny().get());
 		Track track = new Track();
 		track.setBikeNo("TN14 X1234");
 		track.setBoxId("123");
@@ -257,7 +255,7 @@ public class CommonStubs {
 		delivery.setOrders(order);
 		track.setRegistrationDate(LocalDate.now());
 		track.setTrackId(1l);
-		List<TimeCoorinate> coorinates = new ArrayList<>();
+		Set<TimeCoorinate> coorinates = new LinkedHashSet<>();
 		TimeCoorinate tc1 = new TimeCoorinate();
 		tc1.setId(12L);
 		tc1.setTime(LocalDateTime.now());
@@ -274,11 +272,11 @@ public class CommonStubs {
 		price.setModeOfPay(ModeOfPay.COD);
 		price.setTotalAmount(245.50);
 		order.setOrderPrice(price);
-		List<OrderItem> items = new ArrayList<>();
+		Set<OrderItem> items = new LinkedHashSet<>();
 		OrderItem oi1 = new OrderItem();
 		oi1.setOrderItemId(12L);
 		oi1.setOrders(order);
-		oi1.setItem(testRestaurant().getMenu().get(0).getItems().get(0));
+		oi1.setItem(testRestaurant().getMenu().stream().findFirst().get().getItems().stream().findFirst().get());
 		oi1.setPrice(BigDecimal.TEN);
 		oi1.setQuantity(4);
 		items.add(oi1);

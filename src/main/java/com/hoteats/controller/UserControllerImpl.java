@@ -55,7 +55,7 @@ public class UserControllerImpl implements UserController {
 		response.put("message", "username already exist");
 		response.put("status", UserStatus.EXISTS);
 		response.put("userId", u.getUserId());
-		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@Override

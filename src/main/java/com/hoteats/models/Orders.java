@@ -1,7 +1,7 @@
 package com.hoteats.models;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,7 +33,7 @@ public class Orders {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<OrderItem> orderItems;
+	private Set<OrderItem> orderItems;
 
 	@Column
 	private LocalDateTime orderedOn;
@@ -63,11 +63,11 @@ public class Orders {
 		this.delivery = delivery;
 	}
 
-	public List<OrderItem> getOrderItems() {
+	public Set<OrderItem> getOrderItems() {
 		return orderItems;
 	}
 
-	public void setOrderItems(List<OrderItem> orderItems) {
+	public void setOrderItems(Set<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
 

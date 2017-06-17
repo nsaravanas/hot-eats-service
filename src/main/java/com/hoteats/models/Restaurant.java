@@ -1,6 +1,6 @@
 package com.hoteats.models;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,11 +22,11 @@ public class Restaurant {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<RestaurantAddress> branches;
+	private Set<RestaurantAddress> branches;
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Menu> menu;
+	private Set<Menu> menu;
 
 	public Long getRestaurantId() {
 		return restaurantId;
@@ -44,19 +44,19 @@ public class Restaurant {
 		this.name = name;
 	}
 
-	public List<RestaurantAddress> getBranches() {
+	public Set<RestaurantAddress> getBranches() {
 		return branches;
 	}
 
-	public void setBranches(List<RestaurantAddress> branches) {
+	public void setBranches(Set<RestaurantAddress> branches) {
 		this.branches = branches;
 	}
 
-	public List<Menu> getMenu() {
+	public Set<Menu> getMenu() {
 		return menu;
 	}
 
-	public void setMenu(List<Menu> menu) {
+	public void setMenu(Set<Menu> menu) {
 		this.menu = menu;
 	}
 

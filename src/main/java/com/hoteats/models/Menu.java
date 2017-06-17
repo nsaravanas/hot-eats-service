@@ -1,6 +1,6 @@
 package com.hoteats.models;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,7 +27,7 @@ public class Menu {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Item> items;
+	private Set<Item> items;
 
 	@Column
 	private String name;
@@ -56,11 +56,11 @@ public class Menu {
 		this.restaurant = restaurant;
 	}
 
-	public List<Item> getItems() {
+	public Set<Item> getItems() {
 		return items;
 	}
 
-	public void setItems(List<Item> items) {
+	public void setItems(Set<Item> items) {
 		this.items = items;
 	}
 
