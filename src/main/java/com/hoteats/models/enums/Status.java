@@ -1,0 +1,5 @@
+package com.hoteats.models.enums;
+
+public enum Status {
+	PLACED, PROCESSING, PROCESSED, DELIVERY_PICKED_UP, DELIVERED, CANCELLED, UNAVAILABLE, CLOSED, AVAILABLE
+}
